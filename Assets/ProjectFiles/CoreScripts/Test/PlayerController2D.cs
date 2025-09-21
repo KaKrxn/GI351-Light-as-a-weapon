@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem; // << New Input System
+using UnityEngine.InputSystem; // New Input System
 
 [RequireComponent(typeof(Rigidbody2D))]
 [DisallowMultipleComponent]
@@ -9,6 +9,7 @@ public class PlayerController2D : MonoBehaviour
     public InputActionReference moveAction;   // Vector2 (ใช้ X)
     public InputActionReference jumpAction;   // Button
     public InputActionReference slideAction;  // Button
+    public InputActionReference grabAction;   // Button (E / RT)
 
     [Header("Movement")]
     public float moveSpeed = 9f;
@@ -39,41 +40,60 @@ public class PlayerController2D : MonoBehaviour
     public Vector2 colliderOffsetStanding = new Vector2(0f, -0.1f);
     public Vector2 colliderOffsetSliding = new Vector2(0f, -0.45f);
 
-    [Header("Checks & Layers")]
-    public Transform groundCheck;
+    [Header("Push & Pull")]
+    public Transform handPoint;                 // จุดจับข้างตัว
+    public Vector2 detectSize = new Vector2(0.9f, 1.2f);
+    public float detectDistance = 0.5f;
+    public LayerMask pushableMask;              // ใส่เฉพาะ Layer "Pushable"
+    public float grabMoveSpeed = 6f;            // ลดสปีดตอนจับ
+    public float jointBreakForce = 6000f;
+    public float jointBreakTorque = 6000f;
+
+    [Header("Ground Check")]
+    public Transform groundCheck;               // จุดใต้เท้า (ตั้งไว้ใต้ตัวนิดหน่อย)
     public Vector2 groundCheckSize = new Vector2(0.5f, 0.1f);
-    public LayerMask groundLayer = ~0;
+    public LayerMask groundLayer;               // ตั้งให้เป็น Layer "Ground" เท่านั้น
 
     [Header("Debug")]
     public bool drawGizmos = true;
 
+    // Private
     Rigidbody2D rb;
     CapsuleCollider2D capsule;
 
     float inputX;
+    float facing = 1f;
     bool isGrounded, isOnWall, isWallLeft, isSliding;
+
+    // timers
     float coyoteCounter, jumpBufferCounter, wallStickCounter, wallJumpLockCounter, slideTimer;
-    float defaultGravity;
-    float targetSpeed, currentAccel;
+
+    // push/pull
+    bool isGrabbing;
+    FixedJoint2D joint;
+    Rigidbody2D grabbedRb;
+    Collider2D grabbedCol;
+    PhysicsMaterial2D grabbedColOriginalMat;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.freezeRotation = true;
-        defaultGravity = rb.gravityScale;
 
         capsule = GetComponent<CapsuleCollider2D>();
         if (!capsule) capsule = gameObject.AddComponent<CapsuleCollider2D>();
         capsule.direction = CapsuleDirection2D.Vertical;
         SetStandingCollider();
+
+        if (!handPoint) handPoint = transform; // กันพังถ้ายังไม่ได้เซ็ต
     }
 
     void OnEnable()
     {
-        // Enable input actions
         moveAction?.action.Enable();
         jumpAction?.action.Enable();
         slideAction?.action.Enable();
+        grabAction?.action.Enable();
     }
 
     void OnDisable()
@@ -81,25 +101,37 @@ public class PlayerController2D : MonoBehaviour
         moveAction?.action.Disable();
         jumpAction?.action.Disable();
         slideAction?.action.Disable();
+        grabAction?.action.Disable();
     }
 
     void Update()
     {
-        // ----- READ INPUT (New Input System) -----
-        // Move expects Vector2; เราใช้แค่แกน X
+        // ----- READ INPUT -----
         Vector2 move = moveAction ? moveAction.action.ReadValue<Vector2>() : Vector2.zero;
         inputX = Mathf.Clamp(move.x, -1f, 1f);
+        if (Mathf.Abs(inputX) > 0.01f) facing = Mathf.Sign(inputX);
 
         bool jumpPressed = jumpAction && jumpAction.action.WasPressedThisFrame();
         bool jumpHeld = jumpAction && jumpAction.action.IsPressed();
         bool slidePressed = slideAction && slideAction.action.WasPressedThisFrame();
+        bool grabPressed = grabAction && grabAction.action.WasPressedThisFrame();
 
         // ----- TIMERS -----
         if (IsGrounded()) coyoteCounter = coyoteTime; else coyoteCounter -= Time.deltaTime;
         if (jumpPressed) jumpBufferCounter = jumpBuffer; else jumpBufferCounter -= Time.deltaTime;
 
+        // ห้ามกระโดดตอนกำลังจับ + กันบัฟเฟอร์ค้าง
+        if (isGrabbing && jumpPressed) jumpBufferCounter = 0f;
+
+        // ----- GRAB TOGGLE -----
+        if (grabPressed)
+        {
+            if (!isGrabbing) TryGrab();
+            else ReleaseGrab();
+        }
+
         // ----- JUMP / WALL JUMP -----
-        if (jumpBufferCounter > 0f)
+        if (!isGrabbing && jumpBufferCounter > 0f) // << ปิดกระโดดเมื่อกำลังจับ
         {
             if (coyoteCounter > 0f) { DoJump(); }
             else if (IsOnWall()) { DoWallJump(); }
@@ -113,15 +145,17 @@ public class PlayerController2D : MonoBehaviour
     {
         DetectWalls();
 
-        // Horizontal move
-        float desiredX = inputX * moveSpeed;
+        // Horizontal move (ปีดลงถ้ากำลังจับ)
+        float baseSpeed = isGrabbing ? grabMoveSpeed : moveSpeed;
+        float desiredX = inputX * baseSpeed;
+
         bool onGround = IsGrounded();
-        currentAccel = onGround ? acceleration : acceleration * airControl;
+        float currentAccel = onGround ? acceleration : acceleration * airControl;
 
         if (wallJumpLockCounter > 0f)
         {
             wallJumpLockCounter -= Time.fixedDeltaTime;
-            desiredX = rb.linearVelocity.x; // lock
+            desiredX = rb.linearVelocity.x; // lock ทิศช่วงวอลล์จัมพ์
         }
         else
         {
@@ -129,6 +163,13 @@ public class PlayerController2D : MonoBehaviour
         }
 
         rb.linearVelocity = new Vector2(desiredX, rb.linearVelocity.y);
+
+        // Low-jump (ปล่อยปุ่มตกไวขึ้น)
+        // หมายเหตุ: Physics2D.gravity.y เป็นค่าลบ → บวกเข้าไปจะยิ่งลบมากขึ้น = ตกไวขึ้น
+        if (rb.linearVelocity.y > 0f && !(jumpAction && jumpAction.action.IsPressed()))
+        {
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpGravityMultiplier - 1f) * Time.fixedDeltaTime;
+        }
 
         // Fall clamp
         if (rb.linearVelocity.y < maxFallSpeed)
@@ -147,7 +188,7 @@ public class PlayerController2D : MonoBehaviour
             }
         }
 
-        // Ground slide update
+        // Ground slide update (ห้ามสไลด์ตอนกำลังจับ)
         if (isSliding)
         {
             slideTimer -= Time.fixedDeltaTime;
@@ -157,9 +198,53 @@ public class PlayerController2D : MonoBehaviour
         }
     }
 
+    // ===== Push & Pull =====
+    void TryGrab()
+    {
+        // ตรวจกล่องตรงหน้าตามด้านที่หัน
+        Vector2 center = (Vector2)handPoint.position + new Vector2(Mathf.Sign(facing) * detectDistance, 0f);
+        var hit = Physics2D.OverlapBox(center, detectSize, 0f, pushableMask);
+        if (!hit) return;
+
+        grabbedRb = hit.attachedRigidbody;
+        grabbedCol = hit.GetComponent<Collider2D>();
+        if (!grabbedRb) return;
+
+        // เก็บวัสดุเดิม (ไว้คืนตอนปล่อย)
+        if (grabbedCol)
+            grabbedColOriginalMat = grabbedCol.sharedMaterial;
+
+        joint = gameObject.AddComponent<FixedJoint2D>();
+        joint.enableCollision = false;
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedBody = grabbedRb;
+        joint.anchor = transform.InverseTransformPoint(handPoint.position);
+        joint.connectedAnchor = grabbedRb.transform.InverseTransformPoint(handPoint.position);
+        joint.breakForce = jointBreakForce;
+        joint.breakTorque = jointBreakTorque;
+
+        isGrabbing = true;
+        isSliding = false; // กันชนกับโหมดสไลด์
+    }
+
+    void ReleaseGrab()
+    {
+        if (joint) Destroy(joint);
+        if (grabbedCol) grabbedCol.sharedMaterial = grabbedColOriginalMat;
+
+        grabbedRb = null;
+        grabbedCol = null;
+        grabbedColOriginalMat = null;
+        isGrabbing = false;
+    }
+
+    void OnJointBreak2D(Joint2D j) => ReleaseGrab();
+
     // ===== Actions =====
     void DoJump()
     {
+        if (isGrabbing) return; // กันกระโดดระหว่างจับ
+
         coyoteCounter = 0f;
         jumpBufferCounter = 0f;
         rb.linearVelocity = new Vector2(rb.linearVelocity.x, 0f);
@@ -168,6 +253,8 @@ public class PlayerController2D : MonoBehaviour
 
     void DoWallJump()
     {
+        if (isGrabbing) return; // กันวอลล์จัมพ์ระหว่างจับ
+
         jumpBufferCounter = 0f;
         coyoteCounter = 0f;
 
@@ -180,12 +267,14 @@ public class PlayerController2D : MonoBehaviour
 
     void HandleVariableJumpGravity(bool jumpHeld)
     {
+        // ถูกเรียกใน Update เพื่อทำให้การกดค้าง/ปล่อยมีผลทันที (เสริมกับ FixedUpdate อีกชั้น)
         if (!jumpHeld && rb.linearVelocity.y > 0f)
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpGravityMultiplier - 1f) * Time.deltaTime;
     }
 
     void HandleSlideInput(bool slidePressed)
     {
+        if (isGrabbing) return; // ห้ามสไลด์ตอนกำลังจับ
         if (!isSliding && slidePressed && IsGrounded() && Mathf.Abs(rb.linearVelocity.x) >= slideMinSpeed)
         {
             isSliding = true;
@@ -204,6 +293,7 @@ public class PlayerController2D : MonoBehaviour
     // ===== Detection =====
     bool IsGrounded()
     {
+        // ตรวจเฉพาะเลเยอร์ที่อยู่ใน groundLayer เท่านั้น → ตั้ง groundLayer = Layer "Ground"
         Collider2D hit = Physics2D.OverlapBox(
             groundCheck ? groundCheck.position : (Vector2)transform.position + Vector2.down * 0.9f,
             groundCheckSize, 0f, groundLayer);
@@ -240,12 +330,22 @@ public class PlayerController2D : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         if (!drawGizmos) return;
+        // ground check
         Gizmos.color = Color.yellow;
         Vector3 gcPos = groundCheck ? groundCheck.position : transform.position + Vector3.down * 0.9f;
         Gizmos.DrawWireCube(gcPos, groundCheckSize);
 
+        // wall check
         Gizmos.color = Color.cyan;
         Gizmos.DrawLine(transform.position, transform.position + Vector3.left * wallCheckDistance);
         Gizmos.DrawLine(transform.position, transform.position + Vector3.right * wallCheckDistance);
+
+        // grab detect
+        if (handPoint)
+        {
+            Gizmos.color = Color.magenta;
+            Vector2 center = (Vector2)handPoint.position + new Vector2(Mathf.Sign(facing) * detectDistance, 0f);
+            Gizmos.DrawWireCube(center, detectSize);
+        }
     }
 }

@@ -239,16 +239,20 @@ public class LightGun : MonoBehaviour
         if (!mainCam) return Vector2.right;
 
         Vector2 mouseScreen = Mouse.current != null ? Mouse.current.position.ReadValue() : Vector2.zero;
+
+        // ✅ FIX: บังคับ depth ไม่น้อยกว่า nearClipPlane ป้องกัน z=0
+        float __depth = Mathf.Abs(mainCam.transform.position.z - firePoint3.z);
+        if (__depth < mainCam.nearClipPlane) __depth = mainCam.nearClipPlane;
+
         Vector3 mouseWorld3 = mainCam.ScreenToWorldPoint(new Vector3(
             mouseScreen.x, mouseScreen.y,
-            Mathf.Abs(mainCam.transform.position.z - firePoint3.z)
+            __depth
         ));
         if (lockZPlane) mouseWorld3.z = firePoint3.z;
 
         Vector2 from = firePoint3;
         Vector2 to = new Vector2(mouseWorld3.x, mouseWorld3.y);
-        Vector2 dir = (to - from).normalized;
-        return dir;
+        return (to - from).normalized;
     }
 
     void StopFiringVisual()

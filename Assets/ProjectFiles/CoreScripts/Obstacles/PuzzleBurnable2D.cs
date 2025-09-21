@@ -44,6 +44,8 @@ public class PuzzleSearable2D : MonoBehaviour
             for (int i = 0; i < srs.Length; i++)
                 baseColors[i] = srs[i].color;
         }
+
+        _ = vfxActive; // FIX: อ่านค่าอย่างน้อยหนึ่งครั้งเพื่อให้ compiler เห็นว่า "ถูกใช้" -> ลบ CS0414
     }
 
     void Update()
