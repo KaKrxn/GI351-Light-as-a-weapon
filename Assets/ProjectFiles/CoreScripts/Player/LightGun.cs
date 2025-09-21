@@ -30,15 +30,24 @@ public class LightGun : MonoBehaviour
     public bool regenDelayAfterStop = true;
     public float regenDelay = 0.35f;
 
+    [Tooltip("เปิดใช้เกณฑ์ % ที่ต้องรอหลังพลังงานหมดก่อนยิงได้อีก")]
+    public bool useRechargeGate = true;
+    [Range(0f, 1f)] public float rechargeGatePercent = 0.30f; // 30%
+
     [Header("Blocking / Pass-through")]
     public LayerMask blockMask = ~0;            // Walls/Ground/Puzzle
     public string[] passThroughTags;            // Tag ที่ยอมให้ทะลุ
     public bool includeTriggers = true;
 
     [Header("Puzzle Sear (continuous)")]
-    public string puzzleTag = "Puzzle";         // ของที่จะนับเวลา “จี่”
-    public float searSecondsOverride = 0f;      // >0 = บังคับเวลาจี่จากปืน, <=0 = ใช้ของเป้าหมาย
-    public bool autoAddSearableIfMissing = true;// ไม่มีคอมโพเนนต์ก็ใส่ให้
+    [Tooltip("แท็กของเป้าหมายที่จะถูกนับเวลา 'จี่' (รับหลายแท็ก)")]
+    public string[] puzzleTags;                 // << เปลี่ยนเป็นหลายแท็ก
+    [Tooltip(">0 = บังคับเวลาจี่จากปืน, <=0 = ใช้เวลาบนเป้าหมาย")]
+    public float searSecondsOverride = 0f;
+    public bool autoAddSearableIfMissing = true;
+
+    // รองรับไฟล์เดิม/ค่าเดิมใน Inspector (จะอัปเกรดเป็น array ให้อัตโนมัติ)
+    [HideInInspector] public string puzzleTag = "Puzzle";
 
     [Header("Hit Effect (optional)")]
     public GameObject hitVfxPrefab;
@@ -54,6 +63,10 @@ public class LightGun : MonoBehaviour
     bool firingActive;
     float energy;
     float nextRegenTime;
+
+    // เมื่อพลังงานหมด จะล็อกจนกว่าจะถึง % ที่กำหนด
+    bool energyLockActive;
+
     GameObject spawnedHitVfx;
 
     Vector3 lastOrigin, lastEnd;
@@ -64,6 +77,10 @@ public class LightGun : MonoBehaviour
         if (!mainCam) mainCam = Camera.main;
         if (!line) line = GetComponent<LineRenderer>();
         energy = maxEnergy;
+
+        // อัปเกรดค่า Puzzle Tag เดิมให้เป็น array อัตโนมัติ (ครั้งแรก)
+        if ((puzzleTags == null || puzzleTags.Length == 0) && !string.IsNullOrEmpty(puzzleTag))
+            puzzleTags = new[] { puzzleTag };
     }
 
     void OnEnable()
@@ -104,9 +121,7 @@ public class LightGun : MonoBehaviour
             fireAction.action.Disable();
         }
         if (toggleLaserAction && toggleLaserAction.action != null)
-        {
             toggleLaserAction.action.Disable();
-        }
     }
 
     void OnFirePerformed_Hold(InputAction.CallbackContext _) { wantFire = true; }
@@ -115,7 +130,17 @@ public class LightGun : MonoBehaviour
 
     void Update()
     {
-        bool canStartFire = (energy >= minEnergyToFire);
+        // ---------- Energy Gate ----------
+        float threshold = minEnergyToFire;
+        if (useRechargeGate && energyLockActive)
+            threshold = Mathf.Max(minEnergyToFire, rechargeGatePercent * maxEnergy);
+
+        // ปลดล็อกอัตโนมัติเมื่อถึง % ที่กำหนด
+        if (useRechargeGate && energyLockActive && energy >= rechargeGatePercent * maxEnergy)
+            energyLockActive = false;
+
+        bool canStartFire = (energy >= threshold);
+
         if (!wantFire) firingActive = false;
         else if (wantFire && canStartFire) firingActive = true;
 
@@ -201,8 +226,8 @@ public class LightGun : MonoBehaviour
                 spawnedHitVfx = null;
             }
 
-            // ถ้าโดน Puzzle → นับเวลา "จี่" แบบต่อเนื่อง
-            if (hitCol != null && hitCol.CompareTag(puzzleTag))
+            // ถ้าโดน Puzzle ใด ๆ ในรายการ → นับเวลา "จี่" แบบต่อเนื่อง
+            if (hitCol != null && HasAnyTag(hitCol, puzzleTags))
             {
                 var sear = hitCol.GetComponent<PuzzleSearable2D>();
                 if (!sear && autoAddSearableIfMissing)
@@ -222,7 +247,13 @@ public class LightGun : MonoBehaviour
             // Drain energy
             energy = Mathf.Max(0f, energy - drainPerSecond * Time.deltaTime);
             nextRegenTime = Time.time + (regenDelayAfterStop ? regenDelay : 0f);
-            if (energy <= 0f) firingActive = false;
+
+            // หมดพลังงาน → ดับ และเปิดล็อก
+            if (energy <= 0f)
+            {
+                firingActive = false;
+                if (useRechargeGate) energyLockActive = true;
+            }
         }
         else
         {
@@ -240,7 +271,7 @@ public class LightGun : MonoBehaviour
 
         Vector2 mouseScreen = Mouse.current != null ? Mouse.current.position.ReadValue() : Vector2.zero;
 
-        // ✅ FIX: บังคับ depth ไม่น้อยกว่า nearClipPlane ป้องกัน z=0
+        // ป้องกัน z=0 (หลุด frustum) – ใช้ depth อย่างน้อย nearClipPlane
         float __depth = Mathf.Abs(mainCam.transform.position.z - firePoint3.z);
         if (__depth < mainCam.nearClipPlane) __depth = mainCam.nearClipPlane;
 
@@ -274,4 +305,16 @@ public class LightGun : MonoBehaviour
 
     public float Energy01 => maxEnergy > 0f ? energy / maxEnergy : 0f;
     public void AddEnergy(float amount) { energy = Mathf.Clamp(energy + amount, 0f, maxEnergy); }
+
+    // -------- helpers --------
+    static bool HasAnyTag(Collider2D col, string[] tags)
+    {
+        if (!col || tags == null) return false;
+        for (int i = 0; i < tags.Length; i++)
+        {
+            string t = tags[i];
+            if (!string.IsNullOrEmpty(t) && col.CompareTag(t)) return true;
+        }
+        return false;
+    }
 }
