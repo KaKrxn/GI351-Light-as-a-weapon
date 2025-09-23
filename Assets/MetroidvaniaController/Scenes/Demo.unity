@@ -329,6 +329,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114231493902538710, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+      propertyPath: life
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114231493902538710, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: canDoubleJump
       value: 1
       objectReference: {fileID: 0}
@@ -1236,7 +1240,6 @@ MonoBehaviour:
   turnLayerMask:
     serializedVersion: 2
     m_Bits: 513
-  speed: 5
   isInvincible: 0
 --- !u!4 &344519109
 Transform:
@@ -2623,7 +2626,6 @@ MonoBehaviour:
   turnLayerMask:
     serializedVersion: 2
     m_Bits: 513
-  speed: 5
   isInvincible: 0
 --- !u!4 &779425823
 Transform:
@@ -2823,7 +2825,6 @@ MonoBehaviour:
   turnLayerMask:
     serializedVersion: 2
     m_Bits: 513
-  speed: 5
   isInvincible: 0
 --- !u!4 &795341160
 Transform:
@@ -4528,7 +4529,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1458107173046890, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4567782686879236, guid: 061600cc71b08b947a704a7416146101, type: 3}
       propertyPath: m_RootOrder
@@ -4752,7 +4753,6 @@ MonoBehaviour:
   turnLayerMask:
     serializedVersion: 2
     m_Bits: 513
-  speed: 5
   isInvincible: 0
 --- !u!4 &1427435427
 Transform:

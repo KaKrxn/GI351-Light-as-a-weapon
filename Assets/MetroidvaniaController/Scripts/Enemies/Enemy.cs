@@ -13,57 +13,57 @@ public class Enemy : MonoBehaviour {
 
 	private bool facingRight = true;
 	
-	public float speed = 5f;
+	//public float speed = 5f;
 
 	public bool isInvincible = false;
 	private bool isHitted = false;
 
 	void Awake () {
-		fallCheck = transform.Find("FallCheck");
-		wallCheck = transform.Find("WallCheck");
-		rb = GetComponent<Rigidbody2D>();
+		//fallCheck = transform.Find("FallCheck");
+		//wallCheck = transform.Find("WallCheck");
+		//rb = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 
-		if (life <= 0) {
-			transform.GetComponent<Animator>().SetBool("IsDead", true);
-			StartCoroutine(DestroyEnemy());
-		}
+		//if (life <= 0) {
+		//	transform.GetComponent<Animator>().SetBool("IsDead", true);
+		//	//StartCoroutine(DestroyEnemy());
+		//}
 
-		isPlat = Physics2D.OverlapCircle(fallCheck.position, .2f, 1 << LayerMask.NameToLayer("Default"));
-		isObstacle = Physics2D.OverlapCircle(wallCheck.position, .2f, turnLayerMask);
+		//isPlat = Physics2D.OverlapCircle(fallCheck.position, .2f, 1 << LayerMask.NameToLayer("Default"));
+		//isObstacle = Physics2D.OverlapCircle(wallCheck.position, .2f, turnLayerMask);
 
-		if (!isHitted && life > 0 && Mathf.Abs(rb.linearVelocity.y) < 0.5f)
-		{
-			if (isPlat && !isObstacle && !isHitted)
-			{
-				if (facingRight)
-				{
-					rb.linearVelocity = new Vector2(-speed, rb.linearVelocity.y);
-				}
-				else
-				{
-					rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
-				}
-			}
-			else
-			{
-				Flip();
-			}
-		}
+		//if (!isHitted && life > 0 && Mathf.Abs(rb.linearVelocity.y) < 0.5f)
+		//{
+		//	if (isPlat && !isObstacle && !isHitted)
+		//	{
+		//		//if (facingRight)
+		//		//{
+		//		//	rb.linearVelocity = new Vector2(-speed, rb.linearVelocity.y);
+		//		//}
+		//		//else
+		//		//{
+		//		//	rb.linearVelocity = new Vector2(speed, rb.linearVelocity.y);
+		//		//}
+		//	}
+		//	//else
+		//	//{
+		//	//	//Flip();
+		//	//}
+		//}
 	}
 
-	void Flip (){
-		// Switch the way the player is labelled as facing.
-		facingRight = !facingRight;
+	//void Flip (){
+	//	// Switch the way the player is labelled as facing.
+	//	facingRight = !facingRight;
 		
-		// Multiply the player's x local scale by -1.
-		Vector3 theScale = transform.localScale;
-		theScale.x *= -1;
-		transform.localScale = theScale;
-	}
+	//	// Multiply the player's x local scale by -1.
+	//	Vector3 theScale = transform.localScale;
+	//	theScale.x *= -1;
+	//	transform.localScale = theScale;
+	//}
 
 	public void ApplyDamage(float damage) {
 		if (!isInvincible) 

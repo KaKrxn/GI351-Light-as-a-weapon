@@ -8,6 +8,8 @@ TagManager:
   - Ground
   - Pushable
   - Rope
+  - Enemy
+  - Box
   layers:
   - Default
   - TransparentFX
