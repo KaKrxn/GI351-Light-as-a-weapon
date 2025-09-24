@@ -1,103 +1,61 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+#if TMP_PRESENT
+using TMPro;
+#endif
 
 [DisallowMultipleComponent]
 public class EnergyBarUI : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private PlayerEnergy energy;   // ลาก PlayerEnergy มาวาง (ถ้าไม่ใส่จะพยายามหาให้)
-    [SerializeField] private Slider slider;         // ลาก Slider มาวาง (ถ้าไม่ใส่จะดึงจากตัวเอง)
+    [Header("Data")]
+    public InventoryLite inventory;          // ลาก InventoryLite ของ Player มา
+    public string itemId = "Energy";         // ไอเท็มที่จะนับเป็นเกจ
+    [Min(1)] public int targetAmount = 5;    // เก็บครบเท่านี้ = 100%
 
-    [Header("Visual (optional)")]
-    [SerializeField] private Image fillImage;       // ใส่ Image ของ Fill Area/Fill
-    [SerializeField] private Gradient fillGradient; // ใส่ Gradient เพื่อไล่สีตามเปอร์เซ็นต์
-    [SerializeField] private Text valueText;        // (ออปชัน) Text แสดงตัวเลข "cur/max"
+    [Header("UI")]
+    public Slider slider;                    // ถ้าไม่ใส่ จะพยายามหาในลูก
+#if TMP_PRESENT
+    public TMP_Text label;                   // (ออปชัน) โชว์ตัวเลข x/y
+#endif
+    [Tooltip("ความนุ่มนวลของเกจ (ยิ่งมากยิ่งนุ่ม)")]
+    public float smooth = 10f;
 
-    [Header("Smooth Fill")]
-    [SerializeField] private bool smoothFill = true;
-    [SerializeField] private float smoothSpeed = 8f; // ยิ่งมากยิ่งไว
+    [Header("Optional: auto link from skill")]
+    public FlashRevealSkill2D skill;         // ถ้าใส่ จะดึง energyItemId/requiredAmount อัตโนมัติ
 
-    private Coroutine tweenCo;
-
-    void Reset()
-    {
-        slider = GetComponent<Slider>();
-    }
+    float displayValue = 0f;
 
     void Awake()
     {
-        if (!slider) slider = GetComponent<Slider>();
-        if (!energy) energy = FindObjectOfType<PlayerEnergy>();
+        if (!inventory) inventory = FindObjectOfType<InventoryLite>();
+        if (!slider) slider = GetComponentInChildren<Slider>();
+
+        if (skill)
+        {
+            if (!string.IsNullOrEmpty(skill.energyItemId)) itemId = skill.energyItemId;
+            if (skill.requiredAmount > 0) targetAmount = skill.requiredAmount;
+        }
 
         if (slider)
         {
-            slider.minValue = 0;
-            slider.wholeNumbers = true;
+            slider.minValue = 0f;
+            slider.maxValue = 1f;
+            slider.wholeNumbers = false;
         }
     }
 
-    void OnEnable()
+    void Update()
     {
-        // สมัคร event
-        if (energy)
-        {
-            energy.onEnergyChanged.AddListener(OnEnergyChanged);
-            // init ครั้งแรก
-            OnEnergyChanged(energy.Current, energy.maxEnergy);
-        }
-    }
+        int have = inventory ? inventory.GetCount(itemId) : 0;
+        float target = targetAmount > 0 ? Mathf.Clamp01(have / (float)targetAmount) : 0f;
 
-    void OnDisable()
-    {
-        if (energy) energy.onEnergyChanged.RemoveListener(OnEnergyChanged);
-        if (tweenCo != null) StopCoroutine(tweenCo);
-    }
+        // smooth ใส้ไหล
+        displayValue = Mathf.Lerp(displayValue, target, 1f - Mathf.Exp(-smooth * Time.deltaTime));
 
-    private void OnEnergyChanged(int current, int max)
-    {
-        if (!slider) return;
-
-        slider.maxValue = max;
-
-        if (smoothFill)
-        {
-            if (tweenCo != null) StopCoroutine(tweenCo);
-            tweenCo = StartCoroutine(SmoothSet(slider.value, current));
-        }
-        else
-        {
-            slider.value = current;
-            UpdateColorAndText(current, max);
-        }
-    }
-
-    IEnumerator SmoothSet(float from, float to)
-    {
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.unscaledDeltaTime * smoothSpeed;
-            float v = Mathf.Lerp(from, to, t);
-            slider.value = v;
-            UpdateColorAndText((int)v, (int)slider.maxValue);
-            yield return null;
-        }
-        slider.value = to;
-        UpdateColorAndText((int)to, (int)slider.maxValue);
-        tweenCo = null;
-    }
-
-    private void UpdateColorAndText(int current, int max)
-    {
-        if (fillImage && fillGradient != null)
-        {
-            float p = (max <= 0) ? 0f : Mathf.Clamp01((float)current / max);
-            fillImage.color = fillGradient.Evaluate(p);
-        }
-        if (valueText)
-        {
-            valueText.text = $"{current}/{max}";
-        }
+        if (slider) slider.value = displayValue;
+#if TMP_PRESENT
+        if (label)  label.text   = $"{Mathf.Min(have, targetAmount)}/{targetAmount}";
+#endif
     }
 }

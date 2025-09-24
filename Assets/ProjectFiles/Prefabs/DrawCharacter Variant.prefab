@@ -415,11 +415,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 104.02
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       propertyPath: m_LocalPosition.z
@@ -505,7 +505,13 @@ PrefabInstance:
       addedObject: {fileID: 6332151831088549610}
     - targetCorrespondingSourceObject: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 924892614144505284}
+      addedObject: {fileID: 5213295054003299106}
+    - targetCorrespondingSourceObject: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6509288058559622603}
+    - targetCorrespondingSourceObject: {fileID: 1377240496476148, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7293985991862693355}
   m_SourcePrefab: {fileID: 100100000, guid: 50936cccdb69523458c1b42052ebafff, type: 3}
 --- !u!1 &8079616560503161842 stripped
 GameObject:
@@ -607,21 +613,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlashRevealSkill2D
   activateKey: 113
-  energy: {fileID: 924892614144505284}
+  inventory: {fileID: 7293985991862693355}
+  energyItemId: Energy
+  requiredAmount: 5
+  consumeOnActivate: 1
+  playerLight2DObj: {fileID: 3023985083956417093}
+  vcamObj: {fileID: 0}
+  globalLight2DObj: {fileID: 3023985083956417093}
   normalOuterRadius: 5
   flashOuterRadius: 18
   radiusRampUp: 0.12
-  radiusHold: 1
+  radiusHold: 5
   radiusRampDown: 0.25
-  doZoomOut: 1
-  normalOrthoSize: 6
-  zoomOutSize: 10
+  enableGlobalFlash: 1
+  globalFlashIntensity: 1.2
+  globalFlashFadeIn: 0.06
+  globalFlashHold: 5
+  globalFlashFadeOut: 0.18
+  globalFlashColor: {r: 0.9433962, g: 0.91647923, b: 0.80544674, a: 1}
+  normalLensValue: 100
+  zoomOutLensValue: 120
   zoomRampUp: 0.12
-  zoomHold: 1
+  zoomHold: 5
   zoomRampDown: 0.25
+  doZoomOut: 1
   sfxSource: {fileID: 0}
   activateSfx: {fileID: 0}
---- !u!114 &924892614144505284
+--- !u!114 &5213295054003299106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -630,20 +648,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 8079616560503161842}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aba224e8ca93564591afcc76a96da13, type: 3}
+  m_Script: {fileID: 11500000, guid: 25bb7d8cf91e2724188a9aff7c5208ae, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerEnergy
-  maxEnergy: 100
-  startEnergy: 0
-  onEnergyChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  onEnergyFull:
-    m_PersistentCalls:
-      m_Calls: []
-  onEnergyEmptied:
-    m_PersistentCalls:
-      m_Calls: []
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealth
+  maxHP: 100
+  currentHP: 0
+--- !u!114 &6509288058559622603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079616560503161842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5929b385f3933dd4b8d684124ca61c03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerLight
+  candleLight: {fileID: 1053168574628577233}
+  safeRadius: 6
+  flicker: 0
+  flickerAmp: 0.25
+  flickerSpeed: 4
+--- !u!114 &7293985991862693355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8079616560503161842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3772b5232ed7380489f9ef69b8d6b8c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryLite
 --- !u!4 &8085362877787277432 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4660076192433278, guid: 50936cccdb69523458c1b42052ebafff, type: 3}

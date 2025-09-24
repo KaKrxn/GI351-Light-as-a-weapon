@@ -11,9 +11,17 @@ public class FlashRevealSkill2D : MonoBehaviour
     [Header("Input")]
     public KeyCode activateKey = KeyCode.Q;
 
-    [Header("Refs")]
-    public PlayerEnergy energy;
+    [Header("Energy via InventoryLite")]
+    [Tooltip("อ้างอิง InventoryLite บน Player")]
+    public InventoryLite inventory;
+    [Tooltip("ชื่อไอเท็มพลังงานใน InventoryLite")]
+    public string energyItemId = "Energy";
+    [Tooltip("จำนวนพลังงานที่ต้องมีเพื่อกดใช้สกิล")]
+    [Min(1)] public int requiredAmount = 5;
+    [Tooltip("กดใช้แล้วกินพลังงานที่กำหนดออกจากคลัง")]
+    public bool consumeOnActivate = true;
 
+    [Header("Refs")]
     [SerializeField] private UnityEngine.Object playerLight2DObj; // Light2D ของผู้เล่น (optional)
     [SerializeField] private UnityEngine.Object vcamObj;          // ใส่ GO/Component ก็ได้ (CM3/CM2)
     [SerializeField] private UnityEngine.Object globalLight2DObj; // Global Light 2D (optional)
@@ -24,7 +32,7 @@ public class FlashRevealSkill2D : MonoBehaviour
     // ---- Cinemachine lens access (ทำงานได้ทั้ง CM3/CM2) ----
     private Func<float> cmGetLensValue; // VerticalFOV / FieldOfView / OrthographicSize
     private Action<float> cmSetLensValue;
-    private string lensValueName = "?";  // ไว้ debug ว่าใช้พร็อพตัวไหน
+    private string lensValueName = "?";
 
     [Header("Light Expand")]
     public float normalOuterRadius = 5f;
@@ -59,7 +67,7 @@ public class FlashRevealSkill2D : MonoBehaviour
 
     void Awake()
     {
-        if (!energy) energy = GetComponent<PlayerEnergy>();
+        if (!inventory) inventory = GetComponentInParent<InventoryLite>() ?? GetComponent<InventoryLite>();
 
         playerLight2D = playerLight2DObj as Light2D;
         globalLight2D = globalLight2DObj as Light2D;
@@ -82,13 +90,17 @@ public class FlashRevealSkill2D : MonoBehaviour
 
     public void TryActivate()
     {
-        if (isRunning || !energy || !energy.IsFull) return;
+        if (isRunning || !inventory || string.IsNullOrEmpty(energyItemId)) return;
 
-        if (energy.TryConsumeAll())
-        {
-            StartCoroutine(Co_Run());
-            if (sfxSource && activateSfx) sfxSource.PlayOneShot(activateSfx);
-        }
+        // เดิมเช็ก energy.IsFull แล้ว TryConsumeAll() — ตอนนี้ใช้ InventoryLite แทน
+        // ต้องมีไอเท็ม >= requiredAmount ถึงจะกดได้
+        if (!inventory.HasItem(energyItemId, requiredAmount)) return;
+
+        if (consumeOnActivate && !inventory.Consume(energyItemId, requiredAmount))
+            return;
+
+        StartCoroutine(Co_Run());
+        if (sfxSource && activateSfx) sfxSource.PlayOneShot(activateSfx);
     }
 
     IEnumerator Co_Run()
@@ -160,20 +172,17 @@ public class FlashRevealSkill2D : MonoBehaviour
     // ----------------- CINEMACHINE (CM3/CM2) -----------------
     void SetupCinemachineLensAccess()
     {
-        // 1) แปลงอินพุตให้เป็น "คอมโพเนนต์กล้อง" เสมอ
         var camComp = ResolveCinemachineComponent(vcamObj);
         if (camComp == null)
         {
-            // หาในซีนอัตโนมัติ
             camComp = ResolveCinemachineComponent(
                 FindFirstTypeInstance("Cinemachine.CinemachineCamera") ??
                 FindFirstTypeInstance("Cinemachine.CinemachineVirtualCamera")
             );
         }
         if (camComp == null) { Debug.LogWarning("[FlashRevealSkill2D] No Cinemachine camera found."); return; }
-        vcamObj = camComp; // เก็บตัวที่ถูกต้องกลับไว้
+        vcamObj = camComp;
 
-        // 2) ดึง "Lens" (CM3: property Lens, CM2: field m_Lens, หรือสมาชิกชนิด LensSettings)
         var t = vcamObj.GetType();
         Func<object> getLens = null;
         Action<object> setLens = null;
@@ -185,7 +194,6 @@ public class FlashRevealSkill2D : MonoBehaviour
         else if (lensProp != null) { getLens = () => lensProp.GetValue(vcamObj, null); setLens = v => lensProp.SetValue(vcamObj, v, null); }
         else
         {
-            // หา member ใด ๆ ที่ type ชื่อมี "LensSettings"
             var anyLensMember = t
                 .GetMembers(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
                 .FirstOrDefault(m =>
@@ -207,7 +215,6 @@ public class FlashRevealSkill2D : MonoBehaviour
             return;
         }
 
-        // 3) เลือกพร็อพของเลนส์ที่เป็นค่าซูม: VerticalFOV / FieldOfView / OrthographicSize
         var lens = getLens();
         var lt = lens.GetType();
 
@@ -226,7 +233,6 @@ public class FlashRevealSkill2D : MonoBehaviour
 
         cmGetLensValue = () => Convert.ToSingle(chosen.GetValue(getLens()));
         cmSetLensValue = (v) => { var l = getLens(); chosen.SetValue(l, v); setLens(l); };
-        // Debug.Log($"[FlashRevealSkill2D] Using lens value: {lensValueName}");
     }
 
     static Type GetMemberType(MemberInfo m)
@@ -247,12 +253,10 @@ public class FlashRevealSkill2D : MonoBehaviour
         else if (m is PropertyInfo pi) pi.SetValue(target, val, null);
     }
 
-    // รับอะไรมาก็พยายามคืน "คอมโพเนนต์กล้อง" ของ Cinemachine
     UnityEngine.Object ResolveCinemachineComponent(UnityEngine.Object obj)
     {
         if (!obj) return null;
 
-        // ถ้าเป็น GameObject/Transform → ดูคอมโพเนนต์ข้างใน
         var go = (obj as GameObject) ?? (obj as Component ? (obj as Component).gameObject : null);
         if (go)
         {
@@ -262,7 +266,6 @@ public class FlashRevealSkill2D : MonoBehaviour
             if (cm2) return cm2 as Component;
         }
 
-        // ถ้าเป็นคอมโพเนนต์อยู่แล้วก็โอเค
         var type = obj.GetType();
         if (type.FullName == "Cinemachine.CinemachineCamera" ||
             type.FullName == "Cinemachine.CinemachineVirtualCamera")
