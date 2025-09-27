@@ -36,17 +36,17 @@ public class CharacterController2D : MonoBehaviour
     private int wallJumpsUsed = 0;
 
     [Header("Wall Jump Rule")]
-    public bool requireGroundAfterWallJump = true; // ต้องลงพื้นก่อนจึงจะวอลล์จัมพ์ได้อีก
-    private bool wallJumpLock = false;             // ล็อกจนลงพื้น
+    public bool requireGroundAfterWallJump = true; 
+    private bool wallJumpLock = false;             
 
     // ===== Push & Pull (Grab) =====
     [Header("Push & Pull")]
-    public KeyCode grabKey = KeyCode.E;                // ปุ่มจับ/ปล่อย (Old Input)
-    public Transform handPoint;                        // จุดจับ
+    public KeyCode grabKey = KeyCode.E;                
+    public Transform handPoint;                        
     public Vector2 detectSize = new Vector2(0.9f, 1.2f);
     public float detectDistance = 0.5f;
-    public LayerMask pushableMask;                     // เลเยอร์ "Pushable"
-    [Range(0.1f, 1f)] public float grabMoveMultiplier = 0.65f; // เดินช้าลงระหว่างจับ
+    public LayerMask pushableMask;                     
+    [Range(0.1f, 1f)] public float grabMoveMultiplier = 0.65f; 
     public float jointBreakForce = 6000f;
     public float jointBreakTorque = 6000f;
 
@@ -78,12 +78,12 @@ public class CharacterController2D : MonoBehaviour
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        if (!handPoint) handPoint = transform; // กันพังถ้ายังไม่ได้ตั้ง
+        if (!handPoint) handPoint = transform; 
     }
 
     void Update()
     {
-        // Toggle Grab (ปุ่ม E)
+        
         if (Input.GetKeyDown(grabKey))
         {
             if (!isGrabbing) TryGrab();
@@ -96,7 +96,7 @@ public class CharacterController2D : MonoBehaviour
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
-        // Ground check
+        
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -107,7 +107,7 @@ public class CharacterController2D : MonoBehaviour
                 {
                     OnLandEvent.Invoke();
                     wallJumpsUsed = 0;
-                    wallJumpLock = false; // ปลดล็อกวอลล์จัมพ์เมื่อแตะพื้น
+                    wallJumpLock = false; 
 
                     if (!m_IsWall && !isDashing)
                     {
@@ -160,14 +160,14 @@ public class CharacterController2D : MonoBehaviour
     {
         if (!canMove) return;
 
-        // ขณะจับอยู่: เดินช้าลง + ปิด dash
+        
         if (isGrabbing)
         {
             move *= grabMoveMultiplier;
             dash = false;
         }
 
-        // Dash
+        
         if (dash && canDash && !isWallSliding)
         {
             StartCoroutine(DashCooldown());
@@ -185,7 +185,7 @@ public class CharacterController2D : MonoBehaviour
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.linearVelocity.y);
             m_Rigidbody2D.linearVelocity = Vector3.SmoothDamp(m_Rigidbody2D.linearVelocity, targetVelocity, ref velocity, m_MovementSmoothing);
 
-            // ★ ห้าม Flip ตอนกำลัง Grab
+            
             if ((move > 0 && !m_FacingRight && !isWallSliding && !isGrabbing) ||
                 (move < 0 && m_FacingRight && !isWallSliding && !isGrabbing))
             {
@@ -193,7 +193,7 @@ public class CharacterController2D : MonoBehaviour
             }
         }
 
-        // Jump / Double Jump —> บล็อกทั้งหมดเมื่อกำลังจับ
+        
         if (!isGrabbing && m_Grounded && jump)
         {
             animator.SetBool("IsJumping", true);
@@ -222,7 +222,7 @@ public class CharacterController2D : MonoBehaviour
                 canCheck = false;
 
                 m_WallCheck.localPosition = new Vector3(-m_WallCheck.localPosition.x, m_WallCheck.localPosition.y, 0);
-                if (!isGrabbing) Flip(); // ★ อย่า Flip ถ้ากำลัง Grab
+                if (!isGrabbing) Flip(); 
                 StartCoroutine(WaitToCheck(0.1f));
                 canDoubleJump = true;
                 animator.SetBool("IsWallSliding", true);
@@ -291,10 +291,10 @@ public class CharacterController2D : MonoBehaviour
     // ===== Push & Pull - core =====
     void TryGrab()
     {
-        // ห้ามเริ่มจับกลางอากาศ (ถ้าต้องการให้จับกลางอากาศ ให้เอาบรรทัดนี้ออก)
+        
         if (!m_Grounded) return;
 
-        // ตรวจกล่องตรงหน้าตามด้านที่หัน
+        
         float facingSign = m_FacingRight ? 1f : -1f;
         Vector2 center = (Vector2)handPoint.position + new Vector2(facingSign * detectDistance, 0f);
 
@@ -305,7 +305,7 @@ public class CharacterController2D : MonoBehaviour
         grabbedCol = hit.GetComponent<Collider2D>();
         if (!grabbedRb) return;
 
-        // เก็บวัสดุเดิม (ไว้คืนตอนปล่อย)
+        
         if (grabbedCol)
             grabbedColOriginalMat = grabbedCol.sharedMaterial;
 
@@ -319,7 +319,7 @@ public class CharacterController2D : MonoBehaviour
         joint.breakTorque = jointBreakTorque;
 
         isGrabbing = true;
-        isWallSliding = false; // กันชนกับโหมดสไลด์
+        isWallSliding = false; 
     }
 
     void ReleaseGrab()
@@ -330,12 +330,12 @@ public class CharacterController2D : MonoBehaviour
         grabbedRb = null;
         grabbedCol = null;
         grabbedColOriginalMat = null;
-        isGrabbing = false; // ← ปล่อยแล้วถึงจะกลับมา Flip ได้
+        isGrabbing = false; 
     }
 
     void OnJointBreak2D(Joint2D j)
     {
-        // ถ้า joint หลุด/ขาดเอง
+        
         if (j == joint)
         {
             ReleaseGrab();
@@ -345,7 +345,7 @@ public class CharacterController2D : MonoBehaviour
     // ===== Utilities / coroutines =====
     private void Flip()
     {
-        if (isGrabbing) return; // ★ ล็อกทิศไว้ระหว่างจับ/ผลัก/ดึง
+        if (isGrabbing) return; 
 
         m_FacingRight = !m_FacingRight;
         Vector3 theScale = transform.localScale;
@@ -421,7 +421,7 @@ public class CharacterController2D : MonoBehaviour
     // ===== Gizmos =====
     void OnDrawGizmosSelected()
     {
-        // วาดกรอบตรวจจับกล่อง
+        
         if (handPoint)
         {
             Gizmos.color = Color.magenta;
