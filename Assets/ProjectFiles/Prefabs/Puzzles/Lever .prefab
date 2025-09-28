@@ -274,3 +274,20 @@ MonoBehaviour:
   oneShot: 0
   sfxSource: {fileID: 0}
   interactSfx: {fileID: 0}
+  leverSfxSource: {fileID: 0}
+  flipOnSfx: {fileID: 0}
+  flipOffSfx: {fileID: 0}
+  flipLatchSfx: {fileID: 0}
+  flipVolume: 1
+  playLatchAtEnd: 1
+  doorMoveSource: {fileID: 0}
+  doorMoveLoop: {fileID: 0}
+  doorMoveVolume: 0.9
+  pitchWithSpeed: 1
+  minPitch: 1.15
+  maxPitch: 1.15
+  elevatorMode: 0
+  riderTags:
+  - Player
+  riderAttachAnchor: {fileID: 0}
+  lockInteractUntilArrive: 1
