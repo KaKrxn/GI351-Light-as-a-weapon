@@ -16,8 +16,8 @@ public class Lever2D : MonoBehaviour
     [Header("Item Requirement")]
     [Tooltip("รหัสไอเท็มที่ต้องใช้ (เช่น Handle)")]
     public string requiredItemId = "Handle";
-    [Min(1)] public int requiredAmount = 1;          // ใช้กี่ชิ้นต่อการ 'เปิด' 1 ครั้ง
-    public bool consumeItemOnUse = true;             // ใช้แล้วลบออก (เฉพาะตอนเปิดสำเร็จ)
+    [Min(1)] public int requiredAmount = 1;          
+    public bool consumeItemOnUse = true;             
 
     [Header("Lever Visual")]
     [Tooltip("ใส่เฉพาะ 'ด้ามคันโยก' (ฐานไม่ต้อง)")]
@@ -37,15 +37,40 @@ public class Lever2D : MonoBehaviour
     [Tooltip("ใช้ครั้งเดียวแล้วล็อก (ปิด = toggle เปิด/ปิดได้)")]
     public bool oneShot = true;
 
-    [Header("SFX")]
-    public AudioSource sfxSource;
+    [Header("SFX • Interact (single click)")]
+    public AudioSource sfxSource;      
     public AudioClip interactSfx;
+
+    // === NEW: Lever flip SFX ===
+    [Header("SFX • Lever Flip (optional)")]
+    [Tooltip("AudioSource สำหรับเสียงคันโยก (ถ้าเว้นว่าง จะใช้ sfxSource)")]
+    public AudioSource leverSfxSource;
+    [Tooltip("เสียงตอนสับไปตำแหน่ง ON")]
+    public AudioClip flipOnSfx;
+    [Tooltip("เสียงตอนสับกลับตำแหน่ง OFF")]
+    public AudioClip flipOffSfx;
+    [Tooltip("เสียงกระทบ/ล็อก ตอนคันโยกขยับเสร็จ")]
+    public AudioClip flipLatchSfx;
+    [Range(0f, 1f)] public float flipVolume = 1f;
+    public bool playLatchAtEnd = true;
+
+    
+    [Header("SFX • Door Move (optional)")]
+    [Tooltip("AudioSource ที่จะใช้เล่นเสียงประตู (แนะนำแปะไว้ที่วัตถุประตู)")]
+    public AudioSource doorMoveSource;
+    [Tooltip("คลิปเสียงตอนประตูกำลังขยับ (ควรเป็นเสียงที่ loop ได้)")]
+    public AudioClip doorMoveLoop;
+    [Range(0, 1f)] public float doorMoveVolume = 0.9f;
+    [Tooltip("ปรับ pitch ตามความเร็วการเคลื่อน (เล็กน้อย)")]
+    public bool pitchWithSpeed = true;
+    [Range(0.5f, 2f)] public float minPitch = 0.95f;
+    [Range(0.5f, 2f)] public float maxPitch = 1.15f;
 
     // ---- runtime ----
     bool playerInRange;
     GameObject currentPlayer;
     bool isMoving;
-    bool opened;               // สถานะประตูเปิดอยู่ไหม
+    bool opened;               
     Vector3 doorClosedPos;
 
     void Reset()
@@ -58,21 +83,23 @@ public class Lever2D : MonoBehaviour
     {
         if (door) doorClosedPos = door.position;
 
-        // ตั้งมุมเริ่มต้นของด้าม
+        
         if (leverHandle)
         {
             var e = leverHandle.localEulerAngles;
             leverHandle.localEulerAngles = new Vector3(e.x, e.y, handleOffAngleZ);
         }
 
-        // ★ ถ้าเป็น RequireItem ให้ "ซ่อนด้าม" ไว้ก่อน
+        
         if (leverHandle && requireMode == RequireMode.RequireItem)
         {
             leverHandle.gameObject.SetActive(false);
         }
+
+       
+        if (!leverSfxSource) leverSfxSource = sfxSource;
     }
 
-    // อัปเดตใน Editor เวลาเปลี่ยนโหมด เพื่อให้เห็นผลทันที
     void OnValidate()
     {
         if (leverHandle && !Application.isPlaying)
@@ -118,10 +145,9 @@ public class Lever2D : MonoBehaviour
 
     void TryInteract(GameObject player)
     {
-        // oneShot: เปิดไปแล้วไม่ให้ทำซ้ำ
-        if (oneShot && opened) return;
+        if (oneShot && opened) return; 
 
-        // ถ้าต้องใช้ไอเท็ม: เช็กและ "กิน" ตอนกำลังจะเปิดเท่านั้น
+        
         if (requireMode == RequireMode.RequireItem && !opened)
         {
             var inv = player ? player.GetComponentInParent<InventoryLite>() : null;
@@ -133,48 +159,50 @@ public class Lever2D : MonoBehaviour
 
             if (!inv.HasItem(requiredItemId, requiredAmount))
             {
-                // ไม่มีของพอ → ไม่ทำอะไร และยังซ่อนด้ามต่อไป
                 Debug.Log($"[Lever2D] Need {requiredAmount} x {requiredItemId}");
                 return;
             }
 
-            // มีของพอ → แสดงด้ามและกินของ (ถ้าตั้งให้กิน)
             if (leverHandle && !leverHandle.gameObject.activeSelf)
             {
-                // เปิดให้เห็น แล้วเซ็ตมุมเริ่มก่อนอนิเมต
                 leverHandle.gameObject.SetActive(true);
                 var e = leverHandle.localEulerAngles;
                 leverHandle.localEulerAngles = new Vector3(e.x, e.y, handleOffAngleZ);
             }
 
             if (consumeItemOnUse && !inv.Consume(requiredItemId, requiredAmount))
-            {
-                // กันกรณีระบบอื่นแทรกแซงจนกินไม่สำเร็จ
                 return;
-            }
         }
         else
         {
-            // โหมด Free: ถ้าเผลอซ่อนอยู่ ให้เปิดไว้ (กันเคสปรับโหมดภายหลัง)
             if (requireMode == RequireMode.Free && leverHandle && !leverHandle.gameObject.activeSelf)
                 leverHandle.gameObject.SetActive(true);
         }
 
-        // เล่นเสียง
+        
         if (sfxSource && interactSfx) sfxSource.PlayOneShot(interactSfx);
 
-        // อนิเมตด้าม
-        if (leverHandle)
-            StartCoroutine(Co_AnimateHandle(opened ? handleOffAngleZ : handleOnAngleZ));
+        
+        bool willOpen = !opened; 
+        var flipSrc = leverSfxSource ? leverSfxSource : sfxSource;
+        if (flipSrc)
+        {
+            var clip = willOpen ? flipOnSfx : flipOffSfx;
+            if (clip) flipSrc.PlayOneShot(clip, flipVolume);
+        }
 
-        // ขยับประตู
+        
+        if (leverHandle)
+            StartCoroutine(Co_AnimateHandle(willOpen ? handleOnAngleZ : handleOffAngleZ, willOpen));
+
+        
         if (door)
             StartCoroutine(Co_MoveDoor());
 
         opened = oneShot ? true : !opened;
     }
 
-    IEnumerator Co_AnimateHandle(float targetZ)
+    IEnumerator Co_AnimateHandle(float targetZ, bool flippingToOn)
     {
         if (!leverHandle) yield break;
 
@@ -190,6 +218,13 @@ public class Lever2D : MonoBehaviour
             e.z = z;
             leverHandle.localEulerAngles = e;
             yield return null;
+        }
+
+        
+        if (playLatchAtEnd && (leverSfxSource || sfxSource) && flipLatchSfx)
+        {
+            var src = leverSfxSource ? leverSfxSource : sfxSource;
+            src.PlayOneShot(flipLatchSfx, flipVolume);
         }
 
         isMoving = false;
@@ -209,13 +244,13 @@ public class Lever2D : MonoBehaviour
         Vector3 start = door.position;
         Vector3 end;
 
-        if (!opened) // จะเปิด
+        if (!opened) 
         {
             Vector3 axis = (doorAxis == DoorAxis.Y) ? Vector3.up : Vector3.right;
             float sign = (doorDirection == DoorSign.Positive) ? 1f : -1f;
             end = doorClosedPos + axis * sign * doorMoveDistance;
         }
-        else // จะปิด (สำหรับ toggle)
+        else 
         {
             end = doorClosedPos;
         }
@@ -223,15 +258,48 @@ public class Lever2D : MonoBehaviour
         float t = 0f;
         float dur = Mathf.Max(doorMoveTime, 0.0001f);
 
+        // START door-move SFX
+        float lastDist = 0f;
+        if (doorMoveSource && doorMoveLoop)
+        {
+            doorMoveSource.clip = doorMoveLoop;
+            doorMoveSource.loop = true;
+            doorMoveSource.volume = doorMoveVolume;
+            doorMoveSource.pitch = 1f;
+            doorMoveSource.Play();
+            lastDist = 0f;
+        }
+
         while (t < 1f)
         {
             t += Time.deltaTime / dur;
             float k = doorEase != null ? doorEase.Evaluate(Mathf.Clamp01(t)) : Mathf.Clamp01(t);
             door.position = Vector3.Lerp(start, end, k);
+
+            if (doorMoveSource && doorMoveSource.isPlaying && pitchWithSpeed)
+            {
+                float curDist = Vector3.Distance(start, door.position);
+                float delta = Mathf.Max(0f, curDist - lastDist);
+                lastDist = curDist;
+
+                float baseSpeed = doorMoveDistance / dur;
+                float speed = (baseSpeed > 0f) ? (delta / Time.deltaTime) / baseSpeed : 0f;
+                float speed01 = Mathf.Clamp01(speed);
+                doorMoveSource.pitch = Mathf.Lerp(minPitch, maxPitch, speed01);
+            }
+
             yield return null;
         }
 
         door.position = end;
+
+        // STOP door-move SFX
+        if (doorMoveSource && doorMoveSource.isPlaying)
+        {
+            doorMoveSource.Stop();
+            doorMoveSource.pitch = 1f;
+        }
+
         isMoving = false;
     }
 }
