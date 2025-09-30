@@ -10,6 +10,7 @@ TagManager:
   - Rope
   - Enemy
   - Box
+  - Dark
   layers:
   - Default
   - TransparentFX

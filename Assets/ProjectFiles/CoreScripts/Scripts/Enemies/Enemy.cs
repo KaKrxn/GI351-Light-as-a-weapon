@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Enemy : MonoBehaviour {
 
+	[SerializeField] private float damage;
 	public float life = 10;
 	private bool isPlat;
 	private bool isObstacle;
@@ -82,7 +83,7 @@ public class Enemy : MonoBehaviour {
 	{
 		if (collision.gameObject.tag == "Player" && life > 0)
 		{
-			collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(2f, transform.position);
+			collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(damage, transform.position);
 		}
 	}
 

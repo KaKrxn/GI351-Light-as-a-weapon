@@ -12,6 +12,9 @@ public class PuzzleSearable2D : MonoBehaviour
     public float graceWindow = 0.1f;
     public bool destroyOnComplete = true;
 
+    [SerializeField] private float damage;
+    public float life = 10;
+
     [Header("Visuals (optional)")]
     public Gradient progressTint;          // ไล่สีตามความคืบหน้า (0..1)
     [Range(0f, 1f)] public float tintIntensity = 1f;
@@ -140,5 +143,13 @@ public class PuzzleSearable2D : MonoBehaviour
         Color target = progressTint.Evaluate(t01) * tintIntensity;
         for (int i = 0; i < srs.Length; i++)
             srs[i].color = Color.Lerp(baseColors[i], target, target.a);
+    }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && life > 0)
+        {
+            collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(damage, transform.position);
+        }
     }
 }

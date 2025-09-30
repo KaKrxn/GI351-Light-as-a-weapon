@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 156758361872143095}
   - component: {fileID: 7361523440360580120}
-  - component: {fileID: 106355383876059866}
   - component: {fileID: 6265301841906121654}
+  - component: {fileID: 106355383876059866}
   m_Layer: 0
   m_Name: Pressure Plate
   m_TagString: Untagged
@@ -92,54 +92,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &106355383876059866
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2046343641873030795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0000e6ce97f3d9349a63327ba9eb49b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PressurePlateDoor2D
-  allowedTags:
-  - Player
-  mode: 1
-  door: {fileID: 0}
-  moveDistanceY: 4.7
-  moveDuration: 0.4
-  closeDurationMultiplier: 1
-  randomizeEachOpen: 0
-  randomizeOnStart: 0
-  ease:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  plateGraphic: {fileID: 156758361872143095}
-  platePressOffsetY: -0.06
-  platePressLerp: 15
 --- !u!61 &6265301841906121654
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -186,3 +138,71 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 0.66253424}
   m_EdgeRadius: 0
+--- !u!114 &106355383876059866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046343641873030795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0000e6ce97f3d9349a63327ba9eb49b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PressurePlateDoor2D
+  allowedTags:
+  - Player
+  - Box
+  mode: 1
+  ease:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  plateGraphic: {fileID: 156758361872143095}
+  platePressOffsetY: -0.06
+  platePressLerp: 15
+  plateSfxSource: {fileID: 0}
+  pressDownSfx: {fileID: 0}
+  releaseSfx: {fileID: 0}
+  plateVolume: 1
+  doors:
+  - door: {fileID: 0}
+    axis: 0
+    direction: 0
+    moveDistance: 0
+    openDuration: 0
+    closeDurationMultiplier: 0
+    customEase:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 0
+      m_PostInfinity: 0
+      m_RotationOrder: 0
+    moveSource: {fileID: 0}
+    moveLoop: {fileID: 0}
+    moveVolume: 0
+    pitchWithSpeed: 0
+    minPitch: 0
+    maxPitch: 0
+    startPos: {x: 0, y: 0, z: 0}
+    isOpen: 0
