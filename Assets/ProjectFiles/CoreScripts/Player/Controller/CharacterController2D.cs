@@ -9,6 +9,7 @@ public class CharacterController2D : MonoBehaviour
     [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
     [SerializeField] private bool m_AirControl = false;
     [SerializeField] private LayerMask m_WhatIsGround;
+    [SerializeField] private LayerMask m_WhatIsWall;   // ★ แยกเลเยอร์ "กำแพง"
     [SerializeField] private Transform m_GroundCheck;
     [SerializeField] private Transform m_WallCheck;
 
@@ -36,17 +37,24 @@ public class CharacterController2D : MonoBehaviour
     private int wallJumpsUsed = 0;
 
     [Header("Wall Jump Rule")]
-    public bool requireGroundAfterWallJump = true; 
-    private bool wallJumpLock = false;             
+    public bool requireGroundAfterWallJump = true; // ต้องลงพื้นก่อนจึงจะวอลล์จัมพ์ได้อีก
+    private bool wallJumpLock = false;             // ล็อกจนลงพื้น
+
+    // ==== Wall Cling (เกาะกำแพงก่อนสไลด์) ====
+    [Header("Wall Cling")]
+    [SerializeField] private float wallClingDuration = 1.0f; // เวลาที่จะ "เกาะ" ก่อนจะไหลลง
+    private float wallClingTimer = 0f;
+    private bool isWallClinging = false;
+    private float defaultGravityScale;
 
     // ===== Push & Pull (Grab) =====
     [Header("Push & Pull")]
-    public KeyCode grabKey = KeyCode.E;                
-    public Transform handPoint;                        
+    public KeyCode grabKey = KeyCode.E;                // ปุ่มจับ/ปล่อย (Old Input)
+    public Transform handPoint;                        // จุดจับ
     public Vector2 detectSize = new Vector2(0.9f, 1.2f);
     public float detectDistance = 0.5f;
-    public LayerMask pushableMask;                     
-    [Range(0.1f, 1f)] public float grabMoveMultiplier = 0.65f; 
+    public LayerMask pushableMask;                     // เลเยอร์ "Pushable"
+    [Range(0.1f, 1f)] public float grabMoveMultiplier = 0.65f; // เดินช้าลงระหว่างจับ
     public float jointBreakForce = 6000f;
     public float jointBreakTorque = 6000f;
 
@@ -78,12 +86,14 @@ public class CharacterController2D : MonoBehaviour
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        if (!handPoint) handPoint = transform; 
+        if (!handPoint) handPoint = transform;
+
+        defaultGravityScale = m_Rigidbody2D.gravityScale; // จำค่า g เดิมไว้
     }
 
     void Update()
     {
-        
+        // Toggle Grab (ปุ่ม E)
         if (Input.GetKeyDown(grabKey))
         {
             if (!isGrabbing) TryGrab();
@@ -96,7 +106,7 @@ public class CharacterController2D : MonoBehaviour
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
 
-        
+        // Ground check
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
         for (int i = 0; i < colliders.Length; i++)
         {
@@ -107,14 +117,20 @@ public class CharacterController2D : MonoBehaviour
                 {
                     OnLandEvent.Invoke();
                     wallJumpsUsed = 0;
-                    wallJumpLock = false; 
+                    m_Rigidbody2D.gravityScale = defaultGravityScale;
+                    wallJumpLock = false;           // ปลดล็อกวอลล์จัมพ์เมื่อแตะพื้น
+                    isWallClinging = false;         // กันค้างสถานะ
+                    if (animator) animator.SetBool("IsWallClinging", false);
 
                     if (!m_IsWall && !isDashing)
                     {
-                        particleJumpDown.Play();
-                        animator.SetBool("IsJumping", false);
-                        animator.SetBool("IsDoubleJumping", false);
-                        animator.SetBool("JumpUp", false);
+                        if (animator)
+                        {
+                            animator.SetBool("IsJumping", false);
+                            animator.SetBool("IsDoubleJumping", false);
+                            animator.SetBool("JumpUp", false);
+                        }
+                        if (particleJumpDown) particleJumpDown.Play();
                     }
                 }
             }
@@ -125,7 +141,8 @@ public class CharacterController2D : MonoBehaviour
         if (!m_Grounded)
         {
             OnFallEvent.Invoke();
-            Collider2D[] collidersWall = Physics2D.OverlapCircleAll(m_WallCheck.position, k_GroundedRadius, m_WhatIsGround);
+            // ★ ใช้เลเยอร์กำแพง
+            Collider2D[] collidersWall = Physics2D.OverlapCircleAll(m_WallCheck.position, k_GroundedRadius, m_WhatIsWall);
             for (int i = 0; i < collidersWall.Length; i++)
             {
                 if (collidersWall[i].gameObject != null)
@@ -136,6 +153,10 @@ public class CharacterController2D : MonoBehaviour
             }
             prevVelocityX = m_Rigidbody2D.linearVelocity.x;
         }
+
+        // จำกัดความเร็วตก (คุมกลางอากาศด้วย)
+        if (!m_Grounded && m_Rigidbody2D.linearVelocity.y < -limitFallSpeed)
+            m_Rigidbody2D.linearVelocity = new Vector2(m_Rigidbody2D.linearVelocity.x, -limitFallSpeed);
 
         if (limitVelOnWallJump)
         {
@@ -160,15 +181,15 @@ public class CharacterController2D : MonoBehaviour
     {
         if (!canMove) return;
 
-        
+        // ขณะจับอยู่: เดินช้าลง + ปิด dash
         if (isGrabbing)
         {
             move *= grabMoveMultiplier;
             dash = false;
         }
 
-        
-        if (dash && canDash && !isWallSliding)
+        // Dash (กันเริ่มแดชระหว่างกำลังเกาะ/สไลด์)
+        if (dash && canDash && !isWallSliding && !isWallClinging)
         {
             StartCoroutine(DashCooldown());
         }
@@ -179,13 +200,10 @@ public class CharacterController2D : MonoBehaviour
         // Walk / Air control
         else if (m_Grounded || m_AirControl)
         {
-            if (m_Rigidbody2D.linearVelocity.y < -limitFallSpeed)
-                m_Rigidbody2D.linearVelocity = new Vector2(m_Rigidbody2D.linearVelocity.x, -limitFallSpeed);
-
             Vector3 targetVelocity = new Vector2(move * 10f, m_Rigidbody2D.linearVelocity.y);
             m_Rigidbody2D.linearVelocity = Vector3.SmoothDamp(m_Rigidbody2D.linearVelocity, targetVelocity, ref velocity, m_MovementSmoothing);
 
-            
+            // ★ ห้าม Flip ตอนกำลัง Grab
             if ((move > 0 && !m_FacingRight && !isWallSliding && !isGrabbing) ||
                 (move < 0 && m_FacingRight && !isWallSliding && !isGrabbing))
             {
@@ -193,71 +211,128 @@ public class CharacterController2D : MonoBehaviour
             }
         }
 
-        
+        // Jump / Double Jump —> บล็อกทั้งหมดเมื่อกำลังจับ
         if (!isGrabbing && m_Grounded && jump)
         {
-            animator.SetBool("IsJumping", true);
-            animator.SetBool("JumpUp", true);
+            if (animator)
+            {
+                animator.SetBool("IsJumping", true);
+                animator.SetBool("JumpUp", true);
+            }
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+
+            // ทำให้ takeoff เท่ากันทุกครั้ง
+            m_Rigidbody2D.gravityScale = defaultGravityScale;
+            m_Rigidbody2D.linearVelocity = new Vector2(m_Rigidbody2D.linearVelocity.x, 0f);
+            m_Rigidbody2D.AddForce(Vector2.up * m_JumpForce, ForceMode2D.Impulse);
             canDoubleJump = true;
-            particleJumpDown.Play();
-            particleJumpUp.Play();
+            if (particleJumpUp) particleJumpUp.Play();
         }
         else if (!isGrabbing && !m_Grounded && jump && canDoubleJump && !isWallSliding)
         {
             canDoubleJump = false;
-            m_Rigidbody2D.linearVelocity = new Vector2(m_Rigidbody2D.linearVelocity.x, 0);
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce / 1.2f));
-            animator.SetBool("IsDoubleJumping", true);
+            m_Rigidbody2D.linearVelocity = new Vector2(m_Rigidbody2D.linearVelocity.x, 0f);
+            m_Rigidbody2D.AddForce(Vector2.up * (m_JumpForce / 1.2f), ForceMode2D.Impulse); // ★ ใช้ Impulse
+            if (animator) animator.SetBool("IsDoubleJumping", true);
         }
         // Wall logic
         else if (m_IsWall && !m_Grounded)
         {
-            // เริ่มเข้าสไลด์กำแพง (กันเข้าเงื่อนไขซ้ำ)
+            // เข้าโหมด "เกาะกำแพง" ก่อน (1 วินาที) แล้วค่อยเข้าสไลด์
             if ((!oldWallSlidding && m_Rigidbody2D.linearVelocity.y < 0f) || isDashing)
             {
-                isWallSliding = true;
+                isWallClinging = true;           // ★ เปลี่ยนเป็นเกาะก่อน
+                isWallSliding = false;
+                wallClingTimer = wallClingDuration;
+
                 oldWallSlidding = true;
                 canCheck = false;
 
+                // หันหน้าออกจากกำแพง + ย้ายจุดเช็คฝั่งตรงข้าม
                 m_WallCheck.localPosition = new Vector3(-m_WallCheck.localPosition.x, m_WallCheck.localPosition.y, 0);
-                if (!isGrabbing) Flip(); 
+                if (!isGrabbing) Flip();
+
                 StartCoroutine(WaitToCheck(0.1f));
                 canDoubleJump = true;
-                animator.SetBool("IsWallSliding", true);
-            }
-            isDashing = false;
 
-            if (isWallSliding)
-            {
-                if (m_Rigidbody2D.linearVelocity.y < -3)
+                if (animator)
                 {
-                    m_Rigidbody2D.linearVelocity = new Vector2(-transform.localScale.x * 2, -5);
+                    animator.SetBool("IsWallClinging", true);
+                    animator.SetBool("IsWallSliding", false);
                 }
             }
 
+            isDashing = false;
+
+            // ===== Wall Cling (หยุด/ชะลอตก ก่อนเข้าสไลด์) =====
+            if (isWallClinging)
+            {
+                // หยุดตก และตรึงไว้
+                m_Rigidbody2D.gravityScale = 0f;
+                m_Rigidbody2D.linearVelocity = Vector2.zero; // เกาะนิ่ง ๆ
+
+                wallClingTimer -= Time.deltaTime;            // ★ ใช้ deltaTime
+                if (wallClingTimer <= 0f)
+                {
+                    // หมดเวลาการเกาะ -> เข้าโหมดสไลด์ตามเดิม
+                    isWallClinging = false;
+                    isWallSliding = true;
+
+                    // ตั้ง g สำหรับสไลด์นุ่ม ๆ (จะคืนตอนออก)
+                    m_Rigidbody2D.gravityScale = defaultGravityScale * 0.6f;
+
+                    if (animator)
+                    {
+                        animator.SetBool("IsWallClinging", false);
+                        animator.SetBool("IsWallSliding", true);
+                    }
+                }
+            }
+
+            // ขณะสไลด์
+            if (isWallSliding)
+            {
+                // รักษาความเร็วตกไม่ให้พุ่ง
+                if (m_Rigidbody2D.linearVelocity.y < -3f)
+                {
+                    m_Rigidbody2D.linearVelocity = new Vector2(-transform.localScale.x * 2f, -5f);
+                }
+            }
+            else
+            {
+                // ถ้ายังไม่สไลด์ (กำลังเกาะ) g = 0 อยู่แล้ว
+            }
+
             // Wall Jump —> บล็อกเมื่อจับอยู่ หรือยังไม่ลงพื้นจากครั้งก่อน / หรือครบโควตา
-            if (jump && isWallSliding && !isGrabbing)
+            if (jump && (isWallClinging || isWallSliding) && !isGrabbing)
             {
                 if ((requireGroundAfterWallJump && wallJumpLock) ||
                     (limitWallJumps && wallJumpsUsed >= maxWallJumps))
                 {
-                    // do nothing
+                    // do nothing (ล็อกไว้)
                 }
                 else
                 {
-                    animator.SetBool("IsJumping", true);
-                    animator.SetBool("JumpUp", true);
-                    m_Rigidbody2D.linearVelocity = new Vector2(0f, 0f);
-                    m_Rigidbody2D.AddForce(new Vector2(transform.localScale.x * m_JumpForce * 1.2f, m_JumpForce));
+                    if (animator)
+                    {
+                        animator.SetBool("IsJumping", true);
+                        animator.SetBool("JumpUp", true);
+                    }
+
+                    // ออกจากสถานะกำแพงทั้งหมดก่อนออกแรง
+                    isWallClinging = false;
+                    isWallSliding = false;
+
+                    // รีเซ็ตความเร็วแล้วกระโดดออกจากกำแพง
+                    m_Rigidbody2D.gravityScale = defaultGravityScale;
+                    m_Rigidbody2D.linearVelocity = Vector2.zero;
+                    m_Rigidbody2D.AddForce(new Vector2(transform.localScale.x * m_JumpForce * 1.2f, m_JumpForce), ForceMode2D.Impulse);
 
                     jumpWallStartX = transform.position.x;
                     limitVelOnWallJump = true;
                     canDoubleJump = true;
 
-                    isWallSliding = false;
-                    animator.SetBool("IsWallSliding", false);
+                    if (animator) animator.SetBool("IsWallSliding", false);
                     oldWallSlidding = false;
                     m_WallCheck.localPosition = new Vector3(Mathf.Abs(m_WallCheck.localPosition.x), m_WallCheck.localPosition.y, 0);
 
@@ -270,31 +345,47 @@ public class CharacterController2D : MonoBehaviour
             }
             else if (dash && canDash)
             {
+                // ★ แดชจากกำแพง: หลุดเกาะ/สไลด์ก่อน
+                isWallClinging = false;
                 isWallSliding = false;
-                animator.SetBool("IsWallSliding", false);
+                if (animator) animator.SetBool("IsWallSliding", false);
                 oldWallSlidding = false;
                 m_WallCheck.localPosition = new Vector3(Mathf.Abs(m_WallCheck.localPosition.x), m_WallCheck.localPosition.y, 0);
                 canDoubleJump = true;
+                m_Rigidbody2D.gravityScale = defaultGravityScale;
                 StartCoroutine(DashCooldown());
             }
         }
-        else if (isWallSliding && !m_IsWall && canCheck)
+        else if ((isWallSliding || isWallClinging) && !m_IsWall && canCheck)
         {
+            // ออกจากกำแพง
+            isWallClinging = false;
             isWallSliding = false;
-            animator.SetBool("IsWallSliding", false);
+            if (animator)
+            {
+                animator.SetBool("IsWallClinging", false);
+                animator.SetBool("IsWallSliding", false);
+            }
             oldWallSlidding = false;
             m_WallCheck.localPosition = new Vector3(Mathf.Abs(m_WallCheck.localPosition.x), m_WallCheck.localPosition.y, 0);
             canDoubleJump = true;
+            m_Rigidbody2D.gravityScale = defaultGravityScale;
+        }
+        else
+        {
+            // นอกสถานะกำแพงทั้งหมด: คืน g ให้เดิม (กันค้าง)
+            if (!m_Grounded && !isWallSliding && !isWallClinging && !isDashing)
+                m_Rigidbody2D.gravityScale = defaultGravityScale;
         }
     }
 
     // ===== Push & Pull - core =====
     void TryGrab()
     {
-        
+        // ห้ามเริ่มจับกลางอากาศ (ถ้าต้องการให้จับกลางอากาศ ให้เอาบรรทัดนี้ออก)
         if (!m_Grounded) return;
 
-        
+        // ตรวจกล่องตรงหน้าตามด้านที่หัน
         float facingSign = m_FacingRight ? 1f : -1f;
         Vector2 center = (Vector2)handPoint.position + new Vector2(facingSign * detectDistance, 0f);
 
@@ -305,7 +396,7 @@ public class CharacterController2D : MonoBehaviour
         grabbedCol = hit.GetComponent<Collider2D>();
         if (!grabbedRb) return;
 
-        
+        // เก็บวัสดุเดิม (ไว้คืนตอนปล่อย)
         if (grabbedCol)
             grabbedColOriginalMat = grabbedCol.sharedMaterial;
 
@@ -319,7 +410,7 @@ public class CharacterController2D : MonoBehaviour
         joint.breakTorque = jointBreakTorque;
 
         isGrabbing = true;
-        isWallSliding = false; 
+        isWallSliding = false; // กันชนกับโหมดสไลด์
     }
 
     void ReleaseGrab()
@@ -330,12 +421,12 @@ public class CharacterController2D : MonoBehaviour
         grabbedRb = null;
         grabbedCol = null;
         grabbedColOriginalMat = null;
-        isGrabbing = false; 
+        isGrabbing = false; // ← ปล่อยแล้วถึงจะกลับมา Flip ได้
     }
 
     void OnJointBreak2D(Joint2D j)
     {
-        
+        // ถ้า joint หลุด/ขาดเอง
         if (j == joint)
         {
             ReleaseGrab();
@@ -345,7 +436,7 @@ public class CharacterController2D : MonoBehaviour
     // ===== Utilities / coroutines =====
     private void Flip()
     {
-        if (isGrabbing) return; 
+        if (isGrabbing) return; // ★ ล็อกทิศไว้ระหว่างจับ/ผลัก/ดึง
 
         m_FacingRight = !m_FacingRight;
         Vector3 theScale = transform.localScale;
@@ -355,11 +446,12 @@ public class CharacterController2D : MonoBehaviour
 
     IEnumerator DashCooldown()
     {
-        animator.SetBool("IsDashing", true);
+        if (animator) animator.SetBool("IsDashing", true);
         isDashing = true;
         canDash = false;
         yield return new WaitForSeconds(0.1f);
         isDashing = false;
+        if (animator) animator.SetBool("IsDashing", false);
         yield return new WaitForSeconds(0.5f);
         canDash = true;
     }
@@ -393,7 +485,7 @@ public class CharacterController2D : MonoBehaviour
         if (!invincible)
         {
             life -= damage;
-            Vector2 damageDir = new Vector2(position.x - transform.position.x, position.y - transform.position.y).normalized;
+            // Vector2 damageDir = new Vector2(position.x - transform.position.x, position.y - transform.position.y).normalized; // ยังไม่ได้ใช้
             if (life <= 0)
             {
                 StartCoroutine(WaitToDead());
@@ -408,10 +500,11 @@ public class CharacterController2D : MonoBehaviour
 
     IEnumerator WaitToDead()
     {
-        animator.SetBool("IsDead", true);
+        if (animator) animator.SetBool("IsDead", true);
         canMove = false;
         invincible = true;
-        GetComponent<Attack>().enabled = false;
+        var atk = GetComponent<Attack>(); // ★ กัน NRE
+        if (atk) atk.enabled = false;
         yield return new WaitForSeconds(0.4f);
         m_Rigidbody2D.linearVelocity = new Vector2(0, m_Rigidbody2D.linearVelocity.y);
         yield return new WaitForSeconds(1.1f);
@@ -421,7 +514,7 @@ public class CharacterController2D : MonoBehaviour
     // ===== Gizmos =====
     void OnDrawGizmosSelected()
     {
-        
+        // วาดกรอบตรวจจับกล่อง
         if (handPoint)
         {
             Gizmos.color = Color.magenta;

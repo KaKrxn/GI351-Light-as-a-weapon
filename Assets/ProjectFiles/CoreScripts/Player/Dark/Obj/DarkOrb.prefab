@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3718037977301484366}
   - component: {fileID: 3938781743243438169}
   - component: {fileID: 490161819143305719}
-  - component: {fileID: 2612931681935497268}
   - component: {fileID: 4160513362350041949}
+  - component: {fileID: 6803901825580691090}
+  - component: {fileID: 5696667752317142305}
   m_Layer: 0
   m_Name: DarkOrb
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -46.17, y: -7.03, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.274, y: 1.274, z: 1.274}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.066037714, g: 0.066037714, b: 0.063234225, a: 1}
+  m_Color: {r: 0.1827644, g: 0, b: 0.38993704, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -120,29 +121,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2612931681935497268
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1750097574832939116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96c068a0ceda0c64b9788a1524fc204f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShadowHunter
-  target: {fileID: 0}
-  playerLight: {fileID: 0}
-  playerHealth: {fileID: 0}
-  chaseSpeed: 2.5
-  retreatSpeed: 3.5
-  keepDistance: 0.6
-  damagePerSecond: 10
-  fearMargin: 0.15
-  body: {fileID: 3938781743243438169}
-  minAlpha: 0.25
-  maxAlpha: 0.85
 --- !u!58 &4160513362350041949
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -179,3 +157,59 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &6803901825580691090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750097574832939116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49a7d6db81bb9440a1f3dd19177012d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostSpirit
+  player: {fileID: 0}
+  detectRadius: 50
+  chaseSpeed: 8
+  fleeSpeed: 15
+  turnLerp: 12
+  stopDistance: 0.5
+  swingAmplitude: 0.75
+  swingFrequency: 2
+  swingSpeedScale: 0.35
+  maxHealth: 2
+  fleeDuration: 2
+  destroyOnDeath: 1
+  deathVfx: {fileID: 0}
+  sprite: {fileID: 0}
+  hitFlashColor: {r: 1, g: 0.7, b: 0.7, a: 1}
+  hitFlashTime: 0.2
+--- !u!114 &5696667752317142305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750097574832939116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49a7d6db81bb9440a1f3dd19177012d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GhostSpirit
+  player: {fileID: 0}
+  detectRadius: 50
+  chaseSpeed: 15
+  fleeSpeed: 25
+  turnLerp: 12
+  stopDistance: 0.5
+  swingAmplitude: 0.75
+  swingFrequency: 2
+  swingSpeedScale: 0.35
+  maxHealth: 2
+  fleeDuration: 10
+  destroyOnDeath: 1
+  deathVfx: {fileID: 0}
+  sprite: {fileID: 0}
+  hitFlashColor: {r: 1, g: 0.7, b: 0.7, a: 1}
+  hitFlashTime: 0.1

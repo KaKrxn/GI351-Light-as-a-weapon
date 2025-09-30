@@ -30,6 +30,11 @@ public class LightGun : MonoBehaviour
     public bool regenDelayAfterStop = true;
     public float regenDelay = 0.35f;
 
+    [Header("Enemy Damage")]
+    public float enemyDamagePerSecond = 1f;
+    public LayerMask damageMask = ~0;   // ใส่เลเยอร์ "Enemy" ไว้ที่นี่
+
+
     [Tooltip("เปิดใช้เกณฑ์ % ที่ต้องรอหลังพลังงานหมดก่อนยิงได้อีก")]
     public bool useRechargeGate = true;
     [Range(0f, 1f)] public float rechargeGatePercent = 0.30f; // 30%
@@ -210,6 +215,25 @@ public class LightGun : MonoBehaviour
             }
             if (debugDraw) Debug.DrawLine(drawOrigin, drawEnd, debugColor, debugDuration);
             lastOrigin = drawOrigin; lastEnd = drawEnd; lastHadRay = true;
+            // --- APPLY DAMAGE TO ENEMIES ALONG THE RAY BEFORE BLOCKER ---
+            float rayLen = maxDistance;
+            if (firstSolid.HasValue) rayLen = firstSolid.Value.distance;
+
+            // ยิง RaycastAll อีกรอบสำหรับเป้าหมายที่รับดาเมจ (ไม่บล็อกด้วยกำแพง)
+            RaycastHit2D[] dmgHits = Physics2D.RaycastAll((Vector2)origin3, dir, rayLen, damageMask);
+            if (dmgHits != null)
+            {
+                float dmg = enemyDamagePerSecond * Time.deltaTime;
+                for (int i = 0; i < dmgHits.Length; i++)
+                {
+                    var h = dmgHits[i];
+                    if (h.collider != null && h.collider.TryGetComponent<ILightDamageable>(out var target))
+                    {
+                        target.ApplyLightDamage(dmg, h.point);
+                    }
+                }
+            }
+
 
             // VFX ปลายลำแสง
             if (hitCol != null && hitVfxPrefab)
