@@ -12,6 +12,16 @@ public class PuzzleSearable2D : MonoBehaviour
     public float graceWindow = 0.1f;
     public bool destroyOnComplete = true;
 
+    // === Audio on Destroy (optional) ===
+    [Header("Audio (optional)")]
+    [Tooltip("เสียงตอนถูกทำลายสำเร็จ")]
+    public AudioClip destroySfx;
+    [Range(0f, 1f)] public float destroySfxVolume = 1f;
+    [Tooltip("ถ้าเปิด จะใช้ PlayClipAtPoint เพื่อให้เสียงไม่ถูกตัดแม้จะ Destroy ทันที")]
+    public bool usePlayClipAtPoint = true;
+    [Tooltip("ถ้าไม่ใช้ PlayAtPoint ให้ใส่ AudioSource เพื่อเล่น OneShot")]
+    public AudioSource destroySfxSource;
+
     [SerializeField] private float damage;
     public float life = 10;
 
@@ -81,7 +91,8 @@ public class PuzzleSearable2D : MonoBehaviour
         if (completed) return;
 
         float need = overrideRequiredSeconds > 0f ? overrideRequiredSeconds : requiredSearSeconds;
-        float grace = overrideGrace >= 0f ? overrideGrace : graceWindow;
+        float grace = overrideGrace >= 0f
+            ? overrideGrace : graceWindow;
 
         // เริ่มจี่รอบแรก
         if (!searing)
@@ -107,7 +118,14 @@ public class PuzzleSearable2D : MonoBehaviour
             completed = true;
             StopSearingVisuals();
             onSearComplete?.Invoke();
-            if (destroyOnComplete) Destroy(gameObject);
+            if (destroyOnComplete)
+            {
+                PlayDestroySfx();
+                if (!usePlayClipAtPoint && destroySfx && destroySfxSource)
+                    Destroy(gameObject, destroySfx.length);
+                else
+                    Destroy(gameObject);
+            }
         }
     }
 
@@ -150,6 +168,21 @@ public class PuzzleSearable2D : MonoBehaviour
         if (collision.gameObject.tag == "Player" && life > 0)
         {
             collision.gameObject.GetComponent<CharacterController2D>().ApplyDamage(damage, transform.position);
+        }
+    }
+
+    // === Play SFX helper (called before Destroy) ===
+    void PlayDestroySfx()
+    {
+        if (!destroySfx) return;
+
+        if (usePlayClipAtPoint)
+        {
+            AudioSource.PlayClipAtPoint(destroySfx, transform.position, destroySfxVolume);
+        }
+        else if (destroySfxSource)
+        {
+            destroySfxSource.PlayOneShot(destroySfx, destroySfxVolume);
         }
     }
 }

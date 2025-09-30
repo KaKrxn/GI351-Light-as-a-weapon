@@ -57,20 +57,26 @@ public class Lever2D : MonoBehaviour
     [Range(0.5f, 2f)] public float minPitch = 0.95f;
     [Range(0.5f, 2f)] public float maxPitch = 1.15f;
 
-    // ----------------- NEW: Elevator Mode -----------------
+    // ----------------- Elevator Mode -----------------
     [Header("Elevator Mode (optional)")]
     [Tooltip("เปิดใช้งานเพื่อให้แพลตฟอร์มทำงานเหมือนลิฟต์")]
     public bool elevatorMode = false;
-
     [Tooltip("แท็กที่อนุญาตให้ 'ขึ้นลิฟต์' (จะถูกยึดติดระหว่างการเคลื่อน)")]
     public string[] riderTags = new[] { "Player" };
-
     [Tooltip("ถ้าเว้นว่าง จะยึดกับ 'door' ตรง ๆ")]
     public Transform riderAttachAnchor;
-
     [Tooltip("กันกดสแปม: ล็อกการกดจนกว่าจะถึงจุดหมาย")]
     public bool lockInteractUntilArrive = true;
-    // ------------------------------------------------------
+
+    // ----------------- NEW: Prompt UI -----------------
+    [Header("Prompt UI (optional)")]
+    [Tooltip("UI ที่จะแสดงเมื่อผู้เล่นอยู่ในระยะและสามารถกด Interact ได้")]
+    public GameObject promptUI;
+    [Tooltip("ซ่อน Prompt ขณะกำลังเคลื่อน/กำลังทำงานอยู่")]
+    public bool hidePromptWhenBusy = true;
+    [Tooltip("ซ่อน Prompt ถ้า oneShot และเคยเปิดไปแล้ว")]
+    public bool hidePromptWhenOneShotDone = true;
+    // --------------------------------------------------
 
     // ---- runtime ----
     bool playerInRange;
@@ -106,6 +112,8 @@ public class Lever2D : MonoBehaviour
             leverHandle.gameObject.SetActive(false);
 
         if (!leverSfxSource) leverSfxSource = sfxSource;
+
+        SetPrompt(false);
     }
 
     void OnValidate()
@@ -118,6 +126,8 @@ public class Lever2D : MonoBehaviour
 
     void Update()
     {
+        RefreshPrompt(); // <--- NEW: อัปเดตสถานะ Prompt ทุกเฟรม
+
         if (!playerInRange || IsBusy()) return;
         if (Input.GetKeyDown(interactKey)) TryInteract(currentPlayer);
     }
@@ -134,6 +144,7 @@ public class Lever2D : MonoBehaviour
         {
             playerInRange = true;
             currentPlayer = other.gameObject;
+            RefreshPrompt();
         }
     }
 
@@ -143,6 +154,7 @@ public class Lever2D : MonoBehaviour
         {
             playerInRange = false;
             currentPlayer = null;
+            RefreshPrompt();
         }
     }
 
@@ -216,12 +228,14 @@ public class Lever2D : MonoBehaviour
             StartCoroutine(Co_MoveDoor());
 
         opened = oneShot ? true : !opened;
+        RefreshPrompt();
     }
 
     IEnumerator Co_AnimateHandle(float targetZ)
     {
         if (!leverHandle) yield break;
         isHandleMoving = true;
+        RefreshPrompt();
 
         float t = 0f;
         float startZ = NormalizeAngle(leverHandle.localEulerAngles.z);
@@ -243,6 +257,7 @@ public class Lever2D : MonoBehaviour
         }
 
         isHandleMoving = false;
+        RefreshPrompt();
     }
 
     static float NormalizeAngle(float z)
@@ -256,6 +271,7 @@ public class Lever2D : MonoBehaviour
     {
         isDoorMoving = true;
         if (lockInteractUntilArrive) interactLocked = true;
+        RefreshPrompt();
 
         Vector3 start = door.position;
         Vector3 end;
@@ -324,6 +340,7 @@ public class Lever2D : MonoBehaviour
             DetachRider();
 
         isDoorMoving = false;
+        RefreshPrompt();
     }
 
     // ---------- Elevator helpers ----------
@@ -344,6 +361,27 @@ public class Lever2D : MonoBehaviour
         riderPrevParent = null;
     }
 
+    // ---------- Prompt helpers ----------
+    void RefreshPrompt()
+    {
+        if (!promptUI) return;
+
+        bool busy = IsBusy();
+        bool blockedByOneShot = oneShot && opened;
+
+        bool show = playerInRange
+                    && (!hidePromptWhenBusy || !busy)
+                    && (!hidePromptWhenOneShotDone || !blockedByOneShot);
+
+        SetPrompt(show);
+    }
+
+    void SetPrompt(bool on)
+    {
+        if (promptUI && promptUI.activeSelf != on)
+            promptUI.SetActive(on);
+    }
+
     void OnDisable()
     {
         // กันค้างถ้าถูกปิดระหว่างทาง
@@ -356,5 +394,7 @@ public class Lever2D : MonoBehaviour
         }
         isDoorMoving = false;
         interactLocked = false;
+
+        SetPrompt(false);
     }
 }

@@ -1363,6 +1363,8 @@ GameObject:
   - component: {fileID: 8468985169905670343}
   - component: {fileID: 7263786959985714770}
   - component: {fileID: 636241152367624520}
+  - component: {fileID: 1036752058786491312}
+  - component: {fileID: 2047720743845178023}
   m_Layer: 11
   m_Name: Rock Pushable
   m_TagString: Box
@@ -1496,6 +1498,18 @@ MonoBehaviour:
   onReleased:
     m_PersistentCalls:
       m_Calls: []
+  promptUI: {fileID: 0}
+  promptTags:
+  - Player
+  hidePromptWhenGrabbed: 1
+  dragSource: {fileID: 0}
+  dragLoop: {fileID: 0}
+  dragVolume: 0.9
+  speedThreshold: 0.15
+  pitchWithSpeed: 1
+  minPitch: 0.9
+  maxPitch: 1.2
+  fadeTime: 0.08
 --- !u!114 &636241152367624520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1515,6 +1529,126 @@ MonoBehaviour:
   freezeX: 1
   freezeY: 0
   freezeRotation: 1
+--- !u!114 &1036752058786491312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395547516913293458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8793478575a351c4498fcd22e000389c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RockImpactSfx2D
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 129
+  minUpNormal: 0.5
+  minVerticalImpactSpeed: 1
+  playOnlyOnce: 1
+  impactClip: {fileID: 8300000, guid: d7927586db344934b8b1deb5715502dc, type: 3}
+  impactSource: {fileID: 2047720743845178023}
+  volume: 1
+  usePlayClipAtPointFallback: 1
+  debugLog: 0
+--- !u!82 &2047720743845178023
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8395547516913293458}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: d7927586db344934b8b1deb5715502dc, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8919241974704515032
 GameObject:
   m_ObjectHideFlags: 0
