@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class CharacterController2D : MonoBehaviour
 {
+<<<<<<< HEAD
 
     public enum DeathLoadMode { ReloadCurrent, ByName, ByBuildIndex, None }
 
 
+=======
+>>>>>>> 1dfaa6ee3ecd40a3055210a35e767f143c22df66
     [SerializeField] private float m_JumpForce = 400f;
     [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
     [SerializeField] private bool m_AirControl = false;
@@ -152,7 +155,11 @@ public class CharacterController2D : MonoBehaviour
 
         if (!m_Grounded)
         {
+<<<<<<< HEAD
             //OnFallEvent.Invoke();
+=======
+            OnFallEvent.Invoke();
+>>>>>>> 1dfaa6ee3ecd40a3055210a35e767f143c22df66
             // ★ ใช้เลเยอร์กำแพง
             Collider2D[] collidersWall = Physics2D.OverlapCircleAll(m_WallCheck.position, k_GroundedRadius, m_WhatIsWall);
             for (int i = 0; i < collidersWall.Length; i++)
@@ -507,6 +514,7 @@ public class CharacterController2D : MonoBehaviour
                 StartCoroutine(Stun(0.25f));
                 StartCoroutine(MakeInvincible(1f));
             }
+<<<<<<< HEAD
         }
     }
 
@@ -578,6 +586,46 @@ public class CharacterController2D : MonoBehaviour
         return false;
     }
 
+
+    // ===== Gizmos =====
+    void OnDrawGizmosSelected()
+    {
+        // วาดกรอบตรวจจับกล่อง
+        if (handPoint)
+        {
+            Gizmos.color = Color.magenta;
+            float facingSign = 1f;
+            if (Application.isPlaying) facingSign = m_FacingRight ? 1f : -1f;
+            Vector2 center = (Vector2)handPoint.position + new Vector2(facingSign * detectDistance, 0f);
+            Gizmos.DrawWireCube(center, detectSize);
+        }
+        // จุดเช็คพื้น/กำแพง
+        if (m_GroundCheck)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(m_GroundCheck.position, k_GroundedRadius);
+        }
+        if (m_WallCheck)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawWireSphere(m_WallCheck.position, k_GroundedRadius);
+=======
+>>>>>>> 1dfaa6ee3ecd40a3055210a35e767f143c22df66
+        }
+    }
+
+    IEnumerator WaitToDead()
+    {
+        if (animator) animator.SetBool("IsDead", true);
+        canMove = false;
+        invincible = true;
+        var atk = GetComponent<Attack>(); // ★ กัน NRE
+        if (atk) atk.enabled = false;
+        yield return new WaitForSeconds(0.4f);
+        m_Rigidbody2D.linearVelocity = new Vector2(0, m_Rigidbody2D.linearVelocity.y);
+        yield return new WaitForSeconds(1.1f);
+        SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+    }
 
     // ===== Gizmos =====
     void OnDrawGizmosSelected()
