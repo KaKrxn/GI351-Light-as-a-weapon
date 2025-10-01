@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 490161819143305719}
   - component: {fileID: 4160513362350041949}
   - component: {fileID: 6803901825580691090}
-  - component: {fileID: 5696667752317142305}
-  m_Layer: 0
+  - component: {fileID: -5183611318046222128}
+  - component: {fileID: -1560701220375026466}
+  m_Layer: 15
   m_Name: DarkOrb
-  m_TagString: Untagged
+  m_TagString: Dark
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -83,8 +84,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 0.1827644, g: 0, b: 0.38993704, a: 1}
+  m_Sprite: {fileID: 2284350291369019348, guid: 82f38a055b4d7064fad354fd29af3397, type: 3}
+  m_Color: {r: 0.92615604, g: 0.9048889, b: 0.9496855, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -170,7 +171,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GhostSpirit
   player: {fileID: 0}
-  detectRadius: 50
+  detectRadius: 500
+  autoFindPlayer: 1
+  playerTag: Player
+  pickClosestIfMany: 1
+  refindWhileNull: 1
+  refindInterval: 0.5
   chaseSpeed: 8
   fleeSpeed: 15
   turnLerp: 12
@@ -185,7 +191,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   hitFlashColor: {r: 1, g: 0.7, b: 0.7, a: 1}
   hitFlashTime: 0.2
---- !u!114 &5696667752317142305
+--- !u!114 &-5183611318046222128
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,22 +200,29 @@ MonoBehaviour:
   m_GameObject: {fileID: 1750097574832939116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d49a7d6db81bb9440a1f3dd19177012d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e674e8625ff3c74087a26294f1d1d1c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GhostSpirit
-  player: {fileID: 0}
-  detectRadius: 50
-  chaseSpeed: 15
-  fleeSpeed: 25
-  turnLerp: 12
-  stopDistance: 0.5
-  swingAmplitude: 0.75
-  swingFrequency: 2
-  swingSpeedScale: 0.35
-  maxHealth: 2
-  fleeDuration: 10
-  destroyOnDeath: 1
-  deathVfx: {fileID: 0}
-  sprite: {fileID: 0}
-  hitFlashColor: {r: 1, g: 0.7, b: 0.7, a: 1}
-  hitFlashTime: 0.1
+  m_EditorClassIdentifier: Assembly-CSharp::TakeDamage
+  damage: 2
+--- !u!95 &-1560701220375026466
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1750097574832939116}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 744854dd54fb1864a94e22bd3edb2f84, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

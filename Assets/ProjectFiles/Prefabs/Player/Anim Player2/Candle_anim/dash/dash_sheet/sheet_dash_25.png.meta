@@ -1,0 +1,507 @@
+fileFormatVersion: 2
+guid: ca51dcff5c069564198f5b5232184474
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6237055663066553508
+    second: sheet_dash_25_0
+  - first:
+      213: 1353237788884385517
+    second: sheet_dash_25_1
+  - first:
+      213: 9061101665471080391
+    second: sheet_dash_25_2
+  - first:
+      213: 283296654459759914
+    second: sheet_dash_25_3
+  - first:
+      213: 6489357393331929970
+    second: sheet_dash_25_4
+  - first:
+      213: 4189413841467768858
+    second: sheet_dash_25_5
+  - first:
+      213: 7874784188165540328
+    second: sheet_dash_25_6
+  - first:
+      213: -4032909220502964745
+    second: sheet_dash_25_7
+  - first:
+      213: -610178856750031741
+    second: sheet_dash_25_8
+  - first:
+      213: 8638888278342524180
+    second: sheet_dash_25_9
+  - first:
+      213: 6639904682756478785
+    second: sheet_dash_25_10
+  - first:
+      213: 9209807905905159757
+    second: sheet_dash_25_11
+  - first:
+      213: -2758719671593238576
+    second: sheet_dash_25_12
+  - first:
+      213: -20064547563781780
+    second: sheet_dash_25_13
+  - first:
+      213: 8472403133750499958
+    second: sheet_dash_25_14
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sheet_dash_25_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 79
+        width: 234
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5364967be68179a0800000000000000
+      internalID: -6237055663066553508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_1
+      rect:
+        serializedVersion: 2
+        x: 583
+        y: 79
+        width: 234
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: deeb617699aa7c210800000000000000
+      internalID: 1353237788884385517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_2
+      rect:
+        serializedVersion: 2
+        x: 1083
+        y: 79
+        width: 234
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c7aa1cf4ff7fbd70800000000000000
+      internalID: 9061101665471080391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_3
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 80
+        width: 259
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2d61276ec87ee300800000000000000
+      internalID: 283296654459759914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_4
+      rect:
+        serializedVersion: 2
+        x: 1953
+        y: 85
+        width: 157
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 273ca1aca24de0a50800000000000000
+      internalID: 6489357393331929970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_5
+      rect:
+        serializedVersion: 2
+        x: 2064
+        y: 81
+        width: 382
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a108acd31b9c32a30800000000000000
+      internalID: 4189413841467768858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_6
+      rect:
+        serializedVersion: 2
+        x: 2469
+        y: 79
+        width: 122
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e9487a2f7ad84d60800000000000000
+      internalID: 7874784188165540328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_7
+      rect:
+        serializedVersion: 2
+        x: 2578
+        y: 89
+        width: 354
+        height: 258
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5f5846e6a3808c0800000000000000
+      internalID: -4032909220502964745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_8
+      rect:
+        serializedVersion: 2
+        x: 2972
+        y: 122
+        width: 28
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38cd5f900953887f0800000000000000
+      internalID: -610178856750031741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_9
+      rect:
+        serializedVersion: 2
+        x: 3184
+        y: 88
+        width: 242
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41d54ec4e1f73e770800000000000000
+      internalID: 8638888278342524180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_10
+      rect:
+        serializedVersion: 2
+        x: 1532
+        y: 79
+        width: 53
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1471726112ea52c50800000000000000
+      internalID: 6639904682756478785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_11
+      rect:
+        serializedVersion: 2
+        x: 1825
+        y: 90
+        width: 43
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4eaf09ae7fcfcf70800000000000000
+      internalID: 9209807905905159757
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_12
+      rect:
+        serializedVersion: 2
+        x: 2287
+        y: 79
+        width: 52
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0df7dc3331f07b9d0800000000000000
+      internalID: -2758719671593238576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_13
+      rect:
+        serializedVersion: 2
+        x: 3008
+        y: 81
+        width: 36
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c61c1e97667b8bff0800000000000000
+      internalID: -20064547563781780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_25_14
+      rect:
+        serializedVersion: 2
+        x: 3060
+        y: 91
+        width: 47
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67ada1de2c5049570800000000000000
+      internalID: 8472403133750499958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sheet_dash_25_0: -6237055663066553508
+      sheet_dash_25_1: 1353237788884385517
+      sheet_dash_25_10: 6639904682756478785
+      sheet_dash_25_11: 9209807905905159757
+      sheet_dash_25_12: -2758719671593238576
+      sheet_dash_25_13: -20064547563781780
+      sheet_dash_25_14: 8472403133750499958
+      sheet_dash_25_2: 9061101665471080391
+      sheet_dash_25_3: 283296654459759914
+      sheet_dash_25_4: 6489357393331929970
+      sheet_dash_25_5: 4189413841467768858
+      sheet_dash_25_6: 7874784188165540328
+      sheet_dash_25_7: -4032909220502964745
+      sheet_dash_25_8: -610178856750031741
+      sheet_dash_25_9: 8638888278342524180
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

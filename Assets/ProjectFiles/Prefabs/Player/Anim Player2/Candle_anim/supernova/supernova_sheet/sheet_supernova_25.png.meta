@@ -1,0 +1,1391 @@
+fileFormatVersion: 2
+guid: 80f083768c3522f41bdb2717d05a5700
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5803157885805474750
+    second: sheet_supernova_25_0
+  - first:
+      213: -4511064560754145817
+    second: sheet_supernova_25_1
+  - first:
+      213: 5111608715151883628
+    second: sheet_supernova_25_2
+  - first:
+      213: -4991753686562572889
+    second: sheet_supernova_25_3
+  - first:
+      213: 3615525506433679611
+    second: sheet_supernova_25_4
+  - first:
+      213: -6312655996730810884
+    second: sheet_supernova_25_5
+  - first:
+      213: -6698190756782567934
+    second: sheet_supernova_25_6
+  - first:
+      213: -7416741676351077912
+    second: sheet_supernova_25_7
+  - first:
+      213: -8642121068458980657
+    second: sheet_supernova_25_8
+  - first:
+      213: 2408261760044355246
+    second: sheet_supernova_25_9
+  - first:
+      213: -4944167935952341432
+    second: sheet_supernova_25_10
+  - first:
+      213: 5495909105149332898
+    second: sheet_supernova_25_11
+  - first:
+      213: -3685927167505921701
+    second: sheet_supernova_25_12
+  - first:
+      213: -7989463101025893144
+    second: sheet_supernova_25_13
+  - first:
+      213: -5767217631081587060
+    second: sheet_supernova_25_14
+  - first:
+      213: 9150276400166491689
+    second: sheet_supernova_25_15
+  - first:
+      213: -8598526144291696000
+    second: sheet_supernova_25_16
+  - first:
+      213: 3580081911649974315
+    second: sheet_supernova_25_17
+  - first:
+      213: -4746324556464735949
+    second: sheet_supernova_25_18
+  - first:
+      213: -7851717340720378206
+    second: sheet_supernova_25_19
+  - first:
+      213: -1311560564285862415
+    second: sheet_supernova_25_20
+  - first:
+      213: 4556551209013546446
+    second: sheet_supernova_25_21
+  - first:
+      213: -7301261302710722621
+    second: sheet_supernova_25_22
+  - first:
+      213: 5209358758631022818
+    second: sheet_supernova_25_23
+  - first:
+      213: 2235728605735166712
+    second: sheet_supernova_25_24
+  - first:
+      213: -2976203577045447552
+    second: sheet_supernova_25_25
+  - first:
+      213: -200516646067066941
+    second: sheet_supernova_25_26
+  - first:
+      213: 4300493745013506812
+    second: sheet_supernova_25_27
+  - first:
+      213: 3524805653752825615
+    second: sheet_supernova_25_28
+  - first:
+      213: 4813762862186626553
+    second: sheet_supernova_25_29
+  - first:
+      213: -472822432736177149
+    second: sheet_supernova_25_30
+  - first:
+      213: 5723093441315651277
+    second: sheet_supernova_25_31
+  - first:
+      213: -6425899358311321311
+    second: sheet_supernova_25_32
+  - first:
+      213: 8448798939153689177
+    second: sheet_supernova_25_33
+  - first:
+      213: 54191909820121395
+    second: sheet_supernova_25_34
+  - first:
+      213: -8208195394950076549
+    second: sheet_supernova_25_35
+  - first:
+      213: -8790623459843284265
+    second: sheet_supernova_25_36
+  - first:
+      213: 709060960495885541
+    second: sheet_supernova_25_37
+  - first:
+      213: -3627254855935955215
+    second: sheet_supernova_25_38
+  - first:
+      213: -4687641215895862584
+    second: sheet_supernova_25_39
+  - first:
+      213: -1406395034269100670
+    second: sheet_supernova_25_40
+  - first:
+      213: 4472427591277565210
+    second: sheet_supernova_25_41
+  - first:
+      213: 8014136641303321979
+    second: sheet_supernova_25_42
+  - first:
+      213: -7370653226494820206
+    second: sheet_supernova_25_43
+  - first:
+      213: 1441268451132476766
+    second: sheet_supernova_25_44
+  - first:
+      213: -4757525176792473026
+    second: sheet_supernova_25_45
+  - first:
+      213: 3702271266525365852
+    second: sheet_supernova_25_46
+  - first:
+      213: 6067483648585999141
+    second: sheet_supernova_25_47
+  - first:
+      213: 2757663826965939283
+    second: sheet_supernova_25_48
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sheet_supernova_25_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 74
+        width: 332
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24cce0936aa077fa0800000000000000
+      internalID: -5803157885805474750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_1
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 74
+        width: 332
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e54561ceaa7561c0800000000000000
+      internalID: -4511064560754145817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_2
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 74
+        width: 317
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6d3b614b0510f640800000000000000
+      internalID: 5111608715151883628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_3
+      rect:
+        serializedVersion: 2
+        x: 1676
+        y: 74
+        width: 248
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a5f032387ab9bab0800000000000000
+      internalID: -4991753686562572889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_4
+      rect:
+        serializedVersion: 2
+        x: 2196
+        y: 74
+        width: 209
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf0085fca4dec2230800000000000000
+      internalID: 3615525506433679611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_5
+      rect:
+        serializedVersion: 2
+        x: 2691
+        y: 75
+        width: 218
+        height: 302
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cfdde9d11d0f468a0800000000000000
+      internalID: -6312655996730810884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_6
+      rect:
+        serializedVersion: 2
+        x: 4782
+        y: 321
+        width: 82
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20e8b28cefe3b03a0800000000000000
+      internalID: -6698190756782567934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_7
+      rect:
+        serializedVersion: 2
+        x: 5191
+        y: 77
+        width: 212
+        height: 299
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e1424eadb0721990800000000000000
+      internalID: -7416741676351077912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_8
+      rect:
+        serializedVersion: 2
+        x: 5685
+        y: 77
+        width: 203
+        height: 284
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fca45981da4011880800000000000000
+      internalID: -8642121068458980657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_9
+      rect:
+        serializedVersion: 2
+        x: 5786
+        y: 354
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eaec99daf4ddb6120800000000000000
+      internalID: 2408261760044355246
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_10
+      rect:
+        serializedVersion: 2
+        x: 5821
+        y: 344
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8463fa32579c26bb0800000000000000
+      internalID: -4944167935952341432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_11
+      rect:
+        serializedVersion: 2
+        x: 6190
+        y: 75
+        width: 206
+        height: 298
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2adc24a6634654c40800000000000000
+      internalID: 5495909105149332898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_12
+      rect:
+        serializedVersion: 2
+        x: 6335
+        y: 358
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5909d025c4f8dcc0800000000000000
+      internalID: -3685927167505921701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_13
+      rect:
+        serializedVersion: 2
+        x: 3195
+        y: 74
+        width: 210
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e4c24db3a9bf1190800000000000000
+      internalID: -7989463101025893144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_14
+      rect:
+        serializedVersion: 2
+        x: 3694
+        y: 74
+        width: 210
+        height: 271
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8e130dde1ab6ffa0800000000000000
+      internalID: -5767217631081587060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_15
+      rect:
+        serializedVersion: 2
+        x: 4208
+        y: 77
+        width: 197
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 926509cd7ef4cfe70800000000000000
+      internalID: 9150276400166491689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_16
+      rect:
+        serializedVersion: 2
+        x: 4401
+        y: 216
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08295995706eba880800000000000000
+      internalID: -8598526144291696000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_17
+      rect:
+        serializedVersion: 2
+        x: 4661
+        y: 172
+        width: 40
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b28b2b2d7810fa130800000000000000
+      internalID: 3580081911649974315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_18
+      rect:
+        serializedVersion: 2
+        x: 4707
+        y: 80
+        width: 201
+        height: 261
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 339b43786faa12eb0800000000000000
+      internalID: -4746324556464735949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_19
+      rect:
+        serializedVersion: 2
+        x: 4914
+        y: 199
+        width: 29
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ae4695cda8190390800000000000000
+      internalID: -7851717340720378206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_20
+      rect:
+        serializedVersion: 2
+        x: 5414
+        y: 211
+        width: 23
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fd8450ad966ccde0800000000000000
+      internalID: -1311560564285862415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_21
+      rect:
+        serializedVersion: 2
+        x: 5909
+        y: 224
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecd0126de2f1c3f30800000000000000
+      internalID: 4556551209013546446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_22
+      rect:
+        serializedVersion: 2
+        x: 6422
+        y: 226
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cf1f976785bcaa90800000000000000
+      internalID: -7301261302710722621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_23
+      rect:
+        serializedVersion: 2
+        x: 4182
+        y: 197
+        width: 23
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e0a5cbc03c5b4840800000000000000
+      internalID: 5209358758631022818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_24
+      rect:
+        serializedVersion: 2
+        x: 5154
+        y: 184
+        width: 33
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f2260f4257e60f10800000000000000
+      internalID: 2235728605735166712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_25
+      rect:
+        serializedVersion: 2
+        x: 5643
+        y: 193
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08c85f28d9662b6d0800000000000000
+      internalID: -2976203577045447552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_26
+      rect:
+        serializedVersion: 2
+        x: 5915
+        y: 200
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c7ae9b3c2f973df0800000000000000
+      internalID: -200516646067066941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_27
+      rect:
+        serializedVersion: 2
+        x: 6141
+        y: 201
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf2c15ea64c6eab30800000000000000
+      internalID: 4300493745013506812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_28
+      rect:
+        serializedVersion: 2
+        x: 6432
+        y: 184
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f07c93e1110aae030800000000000000
+      internalID: 3524805653752825615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_29
+      rect:
+        serializedVersion: 2
+        x: 5658
+        y: 173
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fdf99991dbedc240800000000000000
+      internalID: 4813762862186626553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_30
+      rect:
+        serializedVersion: 2
+        x: 6150
+        y: 168
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3049ce6a0823079f0800000000000000
+      internalID: -472822432736177149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_31
+      rect:
+        serializedVersion: 2
+        x: 4614
+        y: 74
+        width: 100
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcebcf1a9238c6f40800000000000000
+      internalID: 5723093441315651277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_32
+      rect:
+        serializedVersion: 2
+        x: 4905
+        y: 81
+        width: 82
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1217179549e92d6a0800000000000000
+      internalID: -6425899358311321311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_33
+      rect:
+        serializedVersion: 2
+        x: 5129
+        y: 74
+        width: 60
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95ae3fa1fd9204570800000000000000
+      internalID: 8448798939153689177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_34
+      rect:
+        serializedVersion: 2
+        x: 5627
+        y: 115
+        width: 20
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 331478e314780c000800000000000000
+      internalID: 54191909820121395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_35
+      rect:
+        serializedVersion: 2
+        x: 5676
+        y: 115
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b77e005f6c1a61e80800000000000000
+      internalID: -8208195394950076549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_36
+      rect:
+        serializedVersion: 2
+        x: 5900
+        y: 112
+        width: 19
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d263d9b98e610680800000000000000
+      internalID: -8790623459843284265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_37
+      rect:
+        serializedVersion: 2
+        x: 5948
+        y: 119
+        width: 25
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ec5472df2717d900800000000000000
+      internalID: 709060960495885541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_38
+      rect:
+        serializedVersion: 2
+        x: 6137
+        y: 130
+        width: 15
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fe60223de669adc0800000000000000
+      internalID: -3627254855935955215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_39
+      rect:
+        serializedVersion: 2
+        x: 6185
+        y: 123
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c20c0c762722feb0800000000000000
+      internalID: -4687641215895862584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_40
+      rect:
+        serializedVersion: 2
+        x: 6402
+        y: 118
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2855480fa2b7b7ce0800000000000000
+      internalID: -1406395034269100670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_41
+      rect:
+        serializedVersion: 2
+        x: 6462
+        y: 127
+        width: 19
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1551c5c231411e30800000000000000
+      internalID: 4472427591277565210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_42
+      rect:
+        serializedVersion: 2
+        x: 4400
+        y: 78
+        width: 30
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7d935680dee73f60800000000000000
+      internalID: 8014136641303321979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_43
+      rect:
+        serializedVersion: 2
+        x: 5404
+        y: 82
+        width: 67
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 290803021fd26b990800000000000000
+      internalID: -7370653226494820206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_44
+      rect:
+        serializedVersion: 2
+        x: 5628
+        y: 74
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5d8ab7250a600410800000000000000
+      internalID: 1441268451132476766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_45
+      rect:
+        serializedVersion: 2
+        x: 5931
+        y: 83
+        width: 26
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e32ae43ee00e9fdb0800000000000000
+      internalID: -4757525176792473026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_46
+      rect:
+        serializedVersion: 2
+        x: 6120
+        y: 74
+        width: 20
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c564167f91c116330800000000000000
+      internalID: 3702271266525365852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_47
+      rect:
+        serializedVersion: 2
+        x: 6443
+        y: 81
+        width: 19
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 523a5724b38043450800000000000000
+      internalID: 6067483648585999141
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_supernova_25_48
+      rect:
+        serializedVersion: 2
+        x: 4172
+        y: 74
+        width: 31
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 354cf30d3a0354620800000000000000
+      internalID: 2757663826965939283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sheet_supernova_25_0: -5803157885805474750
+      sheet_supernova_25_1: -4511064560754145817
+      sheet_supernova_25_10: -4944167935952341432
+      sheet_supernova_25_11: 5495909105149332898
+      sheet_supernova_25_12: -3685927167505921701
+      sheet_supernova_25_13: -7989463101025893144
+      sheet_supernova_25_14: -5767217631081587060
+      sheet_supernova_25_15: 9150276400166491689
+      sheet_supernova_25_16: -8598526144291696000
+      sheet_supernova_25_17: 3580081911649974315
+      sheet_supernova_25_18: -4746324556464735949
+      sheet_supernova_25_19: -7851717340720378206
+      sheet_supernova_25_2: 5111608715151883628
+      sheet_supernova_25_20: -1311560564285862415
+      sheet_supernova_25_21: 4556551209013546446
+      sheet_supernova_25_22: -7301261302710722621
+      sheet_supernova_25_23: 5209358758631022818
+      sheet_supernova_25_24: 2235728605735166712
+      sheet_supernova_25_25: -2976203577045447552
+      sheet_supernova_25_26: -200516646067066941
+      sheet_supernova_25_27: 4300493745013506812
+      sheet_supernova_25_28: 3524805653752825615
+      sheet_supernova_25_29: 4813762862186626553
+      sheet_supernova_25_3: -4991753686562572889
+      sheet_supernova_25_30: -472822432736177149
+      sheet_supernova_25_31: 5723093441315651277
+      sheet_supernova_25_32: -6425899358311321311
+      sheet_supernova_25_33: 8448798939153689177
+      sheet_supernova_25_34: 54191909820121395
+      sheet_supernova_25_35: -8208195394950076549
+      sheet_supernova_25_36: -8790623459843284265
+      sheet_supernova_25_37: 709060960495885541
+      sheet_supernova_25_38: -3627254855935955215
+      sheet_supernova_25_39: -4687641215895862584
+      sheet_supernova_25_4: 3615525506433679611
+      sheet_supernova_25_40: -1406395034269100670
+      sheet_supernova_25_41: 4472427591277565210
+      sheet_supernova_25_42: 8014136641303321979
+      sheet_supernova_25_43: -7370653226494820206
+      sheet_supernova_25_44: 1441268451132476766
+      sheet_supernova_25_45: -4757525176792473026
+      sheet_supernova_25_46: 3702271266525365852
+      sheet_supernova_25_47: 6067483648585999141
+      sheet_supernova_25_48: 2757663826965939283
+      sheet_supernova_25_5: -6312655996730810884
+      sheet_supernova_25_6: -6698190756782567934
+      sheet_supernova_25_7: -7416741676351077912
+      sheet_supernova_25_8: -8642121068458980657
+      sheet_supernova_25_9: 2408261760044355246
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

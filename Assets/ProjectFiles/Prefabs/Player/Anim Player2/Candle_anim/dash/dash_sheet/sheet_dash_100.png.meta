@@ -1,0 +1,481 @@
+fileFormatVersion: 2
+guid: 27ec01c754688fa4594cf1c4038469a1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5515044793946165879
+    second: sheet_dash_100_0
+  - first:
+      213: -2048217696522845176
+    second: sheet_dash_100_1
+  - first:
+      213: -1925228363896391079
+    second: sheet_dash_100_2
+  - first:
+      213: 8802716403705100405
+    second: sheet_dash_100_3
+  - first:
+      213: 2531348300969008793
+    second: sheet_dash_100_4
+  - first:
+      213: -5917502181458421991
+    second: sheet_dash_100_5
+  - first:
+      213: -8352634787595973632
+    second: sheet_dash_100_6
+  - first:
+      213: -6302168097389140697
+    second: sheet_dash_100_7
+  - first:
+      213: -4489287851684508273
+    second: sheet_dash_100_8
+  - first:
+      213: -1314511557509114128
+    second: sheet_dash_100_9
+  - first:
+      213: 1631443215714125326
+    second: sheet_dash_100_10
+  - first:
+      213: 8539738607756929942
+    second: sheet_dash_100_11
+  - first:
+      213: 7626854165473705586
+    second: sheet_dash_100_12
+  - first:
+      213: -7872593215031274481
+    second: sheet_dash_100_13
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sheet_dash_100_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 78
+        width: 203
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77257872500698c40800000000000000
+      internalID: 5515044793946165879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_1
+      rect:
+        serializedVersion: 2
+        x: 599
+        y: 78
+        width: 203
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80446106bd44393e0800000000000000
+      internalID: -2048217696522845176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_2
+      rect:
+        serializedVersion: 2
+        x: 1099
+        y: 78
+        width: 203
+        height: 304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 95af27ad0073845e0800000000000000
+      internalID: -1925228363896391079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_3
+      rect:
+        serializedVersion: 2
+        x: 1537
+        y: 79
+        width: 48
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 578b85d2ee7892a70800000000000000
+      internalID: 8802716403705100405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_4
+      rect:
+        serializedVersion: 2
+        x: 1606
+        y: 80
+        width: 257
+        height: 279
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99edb0a3ed7212320800000000000000
+      internalID: 2531348300969008793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_5
+      rect:
+        serializedVersion: 2
+        x: 1957
+        y: 84
+        width: 132
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 91752944e1fc0eda0800000000000000
+      internalID: -5917502181458421991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_6
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 81
+        width: 395
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00c85c23aea751c80800000000000000
+      internalID: -8352634787595973632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_7
+      rect:
+        serializedVersion: 2
+        x: 2491
+        y: 79
+        width: 98
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 725225871833a88a0800000000000000
+      internalID: -6302168097389140697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_8
+      rect:
+        serializedVersion: 2
+        x: 2578
+        y: 87
+        width: 331
+        height: 294
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8d4ed1fb78d2b1c0800000000000000
+      internalID: -4489287851684508273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_9
+      rect:
+        serializedVersion: 2
+        x: 3032
+        y: 108
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f61689f3bae1cde0800000000000000
+      internalID: -1314511557509114128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_10
+      rect:
+        serializedVersion: 2
+        x: 3095
+        y: 86
+        width: 35
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e068cdff5fc04a610800000000000000
+      internalID: 1631443215714125326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_11
+      rect:
+        serializedVersion: 2
+        x: 3185
+        y: 84
+        width: 181
+        height: 297
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69b6a0ea40f338670800000000000000
+      internalID: 8539738607756929942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_12
+      rect:
+        serializedVersion: 2
+        x: 2237
+        y: 79
+        width: 43
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27eb4c6647708d960800000000000000
+      internalID: 7626854165473705586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sheet_dash_100_13
+      rect:
+        serializedVersion: 2
+        x: 3058
+        y: 79
+        width: 27
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0419e48e2eeeb290800000000000000
+      internalID: -7872593215031274481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      sheet_dash_100_0: 5515044793946165879
+      sheet_dash_100_1: -2048217696522845176
+      sheet_dash_100_10: 1631443215714125326
+      sheet_dash_100_11: 8539738607756929942
+      sheet_dash_100_12: 7626854165473705586
+      sheet_dash_100_13: -7872593215031274481
+      sheet_dash_100_2: -1925228363896391079
+      sheet_dash_100_3: 8802716403705100405
+      sheet_dash_100_4: 2531348300969008793
+      sheet_dash_100_5: -5917502181458421991
+      sheet_dash_100_6: -8352634787595973632
+      sheet_dash_100_7: -6302168097389140697
+      sheet_dash_100_8: -4489287851684508273
+      sheet_dash_100_9: -1314511557509114128
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

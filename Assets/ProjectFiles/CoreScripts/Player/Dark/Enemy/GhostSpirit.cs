@@ -6,13 +6,26 @@ public class GhostSpirit : MonoBehaviour, ILightDamageable
     public enum GhostState { Chasing, Fleeing, Dead }
 
     [Header("Target")]
+    [Tooltip("ทิ้งว่างไว้ก็ได้ ถ้าเปิด Auto Find ระบบจะหาให้เอง")]
     public Transform player;               // อิงผู้เล่น
     public float detectRadius = 50f;       // ระยะเจอผู้เล่น (กัน null/ไกลเกิน)
 
+    [Header("Auto Target (on spawn)")]
+    [Tooltip("ให้หา Player อัตโนมัติเมื่อเกิด/เริ่มทำงาน")]
+    public bool autoFindPlayer = true;
+    [Tooltip("ตั้ง Tag ของ Player (เว้นว่าง = หาโดยดูคอมโพเนนต์ CharacterController2D)")]
+    public string playerTag = "Player";
+    [Tooltip("ถ้ามีผู้เล่นหลายตัว ให้เลือกตัวที่ใกล้ที่สุดจุดเกิดนี้")]
+    public bool pickClosestIfMany = true;
+    [Tooltip("ถ้ายังหาไม่เจอ ให้ลองใหม่ทุก ๆ interval จนกว่าจะเจอ")]
+    public bool refindWhileNull = true;
+    [Tooltip("ช่วงเวลาระหว่างการลองหาใหม่ (วินาที)")]
+    public float refindInterval = 0.5f;
+
     [Header("Move")]
     public float chaseSpeed = 4.0f;        // ความเร็วไล่
-    public float fleeSpeed = 6.0f;        // ความเร็วหนี
-    public float turnLerp = 12f;         // คม/นุ่มเวลาเลี้ยว
+    public float fleeSpeed = 6.0f;         // ความเร็วหนี
+    public float turnLerp = 12f;           // คม/นุ่มเวลาเลี้ยว
     public float stopDistance = 0.5f;      // ไม่จี้ประชิดเกินไป
 
     [Header("Dynamic Swing")]
@@ -41,6 +54,8 @@ public class GhostSpirit : MonoBehaviour, ILightDamageable
     private Color _origColor;
     private bool _flashing;
 
+    private Coroutine _refindCo;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -53,8 +68,31 @@ public class GhostSpirit : MonoBehaviour, ILightDamageable
         health = Mathf.Max(1, maxHealth);
     }
 
+    void OnEnable()
+    {
+        // หา player อัตโนมัติเมื่อเริ่มทำงาน
+        if (autoFindPlayer && !player)
+        {
+            TryAssignPlayer();
+            if (refindWhileNull && !player)
+            {
+                if (_refindCo != null) StopCoroutine(_refindCo);
+                _refindCo = StartCoroutine(Co_RefindPlayer());
+            }
+        }
+    }
+
+    void OnDisable()
+    {
+        if (_refindCo != null) { StopCoroutine(_refindCo); _refindCo = null; }
+    }
+
     void Update()
     {
+        // ถ้า player หายไประหว่างเกม (เช่น ถูกทำลาย/เปลี่ยนฉากย่อย) ให้ลองหาใหม่
+        if (autoFindPlayer && refindWhileNull && !player && _refindCo == null)
+            _refindCo = StartCoroutine(Co_RefindPlayer());
+
         if (!player) return;
 
         switch (state)
@@ -150,9 +188,7 @@ public class GhostSpirit : MonoBehaviour, ILightDamageable
         // ทำ Flash สั้น ๆ
         if (sprite && !_flashing) StartCoroutine(Flash());
 
-        // เมื่อโดนพอ (ปืนส่งมาทีละเล็กด้วย Time.deltaTime) เราจะคิดเป็น "โดน 1 ครั้ง"
-        // เพื่อให้สะดวก: แค่โดนลำแสง "ต่อเนื่องชั่วขณะ" เราจะนับเป็น 1 HP
-        // → คุณจะปรับ logic นี้เป็นสะสมครบเกณฑ์แล้วค่อย -1 ก็ได้
+        // ตัดเลือดแบบครั้งละ 1 หน่วย (ตามลอจิกเดิม)
         TakeOneHit();
     }
 
@@ -171,7 +207,7 @@ public class GhostSpirit : MonoBehaviour, ILightDamageable
             return;
         }
 
-        // เสียเลือดครั้งแรก → หนี 10 วิ
+        // เสียเลือดครั้งแรก → หนีตามกำหนด
         state = GhostState.Fleeing;
         fleeTimer = Mathf.Max(2f, fleeDuration);
     }
@@ -188,10 +224,68 @@ public class GhostSpirit : MonoBehaviour, ILightDamageable
         _flashing = false;
     }
 
+    // ================= Auto-Find Player =================
+    void TryAssignPlayer()
+    {
+        Transform found = null;
+
+        // 1) ด้วย Tag
+        if (!string.IsNullOrEmpty(playerTag))
+        {
+            var go = GameObject.FindGameObjectWithTag(playerTag);
+            if (go) found = go.transform;
+        }
+
+        // 2) ด้วยคอมโพเนนต์ CharacterController2D (ถ้าไม่ได้ตั้ง Tag/หาไม่เจอ)
+        if (!found)
+        {
+            // หาให้ครบแล้วเลือกที่ใกล้ที่สุดถ้าต้องการ
+            var candidates = FindObjectsOfType<CharacterController2D>(includeInactive: false);
+            if (candidates != null && candidates.Length > 0)
+            {
+                if (pickClosestIfMany && candidates.Length > 1)
+                {
+                    float best = float.PositiveInfinity;
+                    foreach (var c in candidates)
+                    {
+                        if (!c) continue;
+                        float d = (c.transform.position - transform.position).sqrMagnitude;
+                        if (d < best) { best = d; found = c.transform; }
+                    }
+                }
+                else
+                {
+                    found = candidates[0].transform;
+                }
+            }
+        }
+
+        // 3) ชื่อ GameObject = "Player" (เผื่อโปรเจ็กต์ไม่ได้ใช้ Tag/คอมโพเนนต์)
+        if (!found)
+        {
+            var goByName = GameObject.Find("Player");
+            if (goByName) found = goByName.transform;
+        }
+
+        if (found) player = found;
+    }
+
+    System.Collections.IEnumerator Co_RefindPlayer()
+    {
+        // ลองหาเรื่อย ๆ จนกว่าจะเจอ หรือถูกปิด
+        while (autoFindPlayer && !player)
+        {
+            TryAssignPlayer();
+            if (player) break;
+            yield return new WaitForSeconds(Mathf.Max(0.05f, refindInterval));
+        }
+        _refindCo = null;
+    }
+    // ====================================================
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(transform.position, detectRadius);
     }
 }
-

@@ -1,0 +1,533 @@
+fileFormatVersion: 2
+guid: 0f25a2e3839361d4886d659db06ef419
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2390164720770270971
+    second: supernova_75_0015_0
+  - first:
+      213: -1079949399577092010
+    second: supernova_75_0015_1
+  - first:
+      213: 6620128928566743527
+    second: supernova_75_0015_2
+  - first:
+      213: -74139634634123774
+    second: supernova_75_0015_3
+  - first:
+      213: 490478155653454642
+    second: supernova_75_0015_4
+  - first:
+      213: -4395212883690367240
+    second: supernova_75_0015_5
+  - first:
+      213: -955149143733725881
+    second: supernova_75_0015_6
+  - first:
+      213: -91108584582019733
+    second: supernova_75_0015_7
+  - first:
+      213: 8696409744479464306
+    second: supernova_75_0015_8
+  - first:
+      213: -7283674741960704818
+    second: supernova_75_0015_9
+  - first:
+      213: -5204067982268426282
+    second: supernova_75_0015_10
+  - first:
+      213: -2323621109890295657
+    second: supernova_75_0015_11
+  - first:
+      213: 343139516431478223
+    second: supernova_75_0015_12
+  - first:
+      213: -2619095486894755971
+    second: supernova_75_0015_13
+  - first:
+      213: -5323404179239404244
+    second: supernova_75_0015_14
+  - first:
+      213: -919288665427536111
+    second: supernova_75_0015_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: supernova_75_0015_0
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 895
+        width: 27
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf6ce2066229b2120800000000000000
+      internalID: 2390164720770270971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_1
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 900
+        width: 39
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 650afce2ebf3301f0800000000000000
+      internalID: -1079949399577092010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_2
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 152
+        width: 402
+        height: 706
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e112828f2c6fdb50800000000000000
+      internalID: 6620128928566743527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_3
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 834
+        width: 36
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2061bd5256a98fef0800000000000000
+      internalID: -74139634634123774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_4
+      rect:
+        serializedVersion: 2
+        x: 1060
+        y: 597
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23b10dda8478ec600800000000000000
+      internalID: 490478155653454642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_5
+      rect:
+        serializedVersion: 2
+        x: 604
+        y: 544
+        width: 27
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f65a6b4b211103c0800000000000000
+      internalID: -4395212883690367240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_6
+      rect:
+        serializedVersion: 2
+        x: 1089
+        y: 501
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7459b341ae0aeb2f0800000000000000
+      internalID: -955149143733725881
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_7
+      rect:
+        serializedVersion: 2
+        x: 538
+        y: 465
+        width: 51
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b65000c99315cbef0800000000000000
+      internalID: -91108584582019733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_8
+      rect:
+        serializedVersion: 2
+        x: 1050
+        y: 435
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27ba1f8469adfa870800000000000000
+      internalID: 8696409744479464306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_9
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 367
+        width: 46
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecc72f9a9603bea90800000000000000
+      internalID: -7283674741960704818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_10
+      rect:
+        serializedVersion: 2
+        x: 540
+        y: 260
+        width: 29
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d718e11ebf67c7b0800000000000000
+      internalID: -5204067982268426282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_11
+      rect:
+        serializedVersion: 2
+        x: 637
+        y: 247
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 798d36069e6d0cfd0800000000000000
+      internalID: -2323621109890295657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_12
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 238
+        width: 26
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcd2c49729313c400800000000000000
+      internalID: 343139516431478223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_13
+      rect:
+        serializedVersion: 2
+        x: 1181
+        y: 255
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7f2fcef78a17abd0800000000000000
+      internalID: -2619095486894755971
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_14
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 150
+        width: 36
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c2dfa948a187f16b0800000000000000
+      internalID: -5323404179239404244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: supernova_75_0015_15
+      rect:
+        serializedVersion: 2
+        x: 1142
+        y: 164
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 117162354d70e33f0800000000000000
+      internalID: -919288665427536111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      supernova_75_0015_0: 2390164720770270971
+      supernova_75_0015_1: -1079949399577092010
+      supernova_75_0015_10: -5204067982268426282
+      supernova_75_0015_11: -2323621109890295657
+      supernova_75_0015_12: 343139516431478223
+      supernova_75_0015_13: -2619095486894755971
+      supernova_75_0015_14: -5323404179239404244
+      supernova_75_0015_15: -919288665427536111
+      supernova_75_0015_2: 6620128928566743527
+      supernova_75_0015_3: -74139634634123774
+      supernova_75_0015_4: 490478155653454642
+      supernova_75_0015_5: -4395212883690367240
+      supernova_75_0015_6: -955149143733725881
+      supernova_75_0015_7: -91108584582019733
+      supernova_75_0015_8: 8696409744479464306
+      supernova_75_0015_9: -7283674741960704818
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

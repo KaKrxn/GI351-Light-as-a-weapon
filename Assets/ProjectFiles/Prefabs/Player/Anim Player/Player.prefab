@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8192505203993254864, guid: 26fb16355d3dae544aca36192ad4e113, type: 3}
       propertyPath: m_WhatIsWall.m_Bits
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8192505203993254864, guid: 26fb16355d3dae544aca36192ad4e113, type: 3}
       propertyPath: m_WhatIsGround.m_Bits
